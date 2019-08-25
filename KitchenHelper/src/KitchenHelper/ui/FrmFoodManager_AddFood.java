@@ -101,13 +101,14 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 			}
 			String id = this.edtId.getText();
 			String name = this.edtName.getText();
+
 			FoodInfo r = new FoodInfo();
 			r.setReaderid(id);
 			r.setReaderName(name);
 			String rtName = this.cmbReadertype.getSelectedItem().toString();
 			FoodTypeInfo rt = this.foodTypeMap_name.get(rtName);
 			if (rt == null) {
-				JOptionPane.showMessageDialog(null, "请选择读者类别", "错误", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "请选择食材类别", "错误", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			r.setFoodTypeNo(rt.getFoodTypeNo());
