@@ -1,0 +1,49 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping package="cn.edu.zucc.personplan.model">  
+    <!-- 标识一个类的xml映射,name为类名,table为表名 -->  
+    <class name="BeanUser" table="BeanUser">  
+        <!-- 主键的设置,generator标识主键生成方式,因为native便于数据库的移植所以.嘿嘿!你懂的 -->  
+        <id name="userId" type="string">  
+            <column name="userId"/>  
+            <generator class="assigned"/>  
+        </id>  
+        <!-- 这里配了该类一个属性街道名称 name属性字段,column,数据库对应列 -->  
+        <property name="pwd" type="string" column="pwd" />  
+        <!-- 这里同上,写法不同而已 -->  
+        <property name="registerDate" type="date">  
+            <column name="registerDate" />  
+        </property>  
+    </class>  
+    <class name="BeanPlan" table="BeanPlan">  
+        <!-- 主键的设置,generator标识主键生成方式,因为native便于数据库的移植所以.嘿嘿!你懂的 -->  
+        <id name="planId" type="int">  
+            <column name="planId"/>  
+            <generator class="identity"/>  
+        </id>  
+        <!-- 这里配了该类一个属性街道名称 name属性字段,column,数据库对应列 -->  
+        <property name="userId" type="string" column="userId" />  
+        <property name="planOrder" type="int" column="planOrder" /> 
+        <property name="planName" type="string" column="planName" /> 
+        <property name="createDate" type="date" column="createDate" /> 
+        <property name="stepCount" type="int" column="stepCount" /> 
+        <property name="startStepCount" type="int" column="startStepCount" /> 
+        <property name="finishedStepCount" type="int" column="finishedStepCount" /> 
+	</class>   
+
+	<class name="BeanStep" table="BeanStep">  
+        <!-- 主键的设置,generator标识主键生成方式,因为native便于数据库的移植所以.嘿嘿!你懂的 -->  
+        <id name="stepId" type="int">  
+            <column name="stepId"/>  
+            <generator class="identity"/>  
+        </id>  
+        <!-- 这里配了该类一个属性街道名称 name属性字段,column,数据库对应列 -->  
+        <property name="planId" type="int" column="planId" />  
+        <property name="stepOrder" type="int" column="stepOrder" /> 
+        <property name="stepName" type="string" column="stepName" /> 
+        <property name="planBegindate" type="date" column="planBegindate" /> 
+        <property name="planEndDate" type="date" column="planEndDate" /> 
+        <property name="realBeginDate" type="date" column="realBeginDate" /> 
+        <property name="realEndDate" type="date" column="realEndDate" /> 
+    </class>    
+    
+</hibernate-mapping>  

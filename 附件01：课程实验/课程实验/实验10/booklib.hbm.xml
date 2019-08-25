@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping package="cn.edu.zucc.booklib.model">  
+    <!-- 标识一个类的xml映射,name为类名,table为表名 -->  
+    <class name="BeanPublisher" table="BeanPublisher">  
+        <!-- 主键的设置,generator标识主键生成方式,因为native便于数据库的移植所以.嘿嘿!你懂的 -->  
+        <id name="pubid" type="string">  
+            <column name="pubid"/>  
+            <generator class="assigned"/>  
+        </id>  
+        <!-- 这里配了该类一个属性街道名称 name属性字段,column,数据库对应列 -->  
+        <property name="publisherName" type="string" column="publisherName" />  
+        <!-- 这里同上,写法不同而已 -->  
+        <property name="address" type="string">  
+            <column name="address" />  
+        </property>  
+    </class>  
+</hibernate-mapping>  
