@@ -134,42 +134,43 @@ public class FrmFoodManager extends JDialog implements ActionListener {
 		if (e.getSource() == this.btnAdd) {
 			FrmFoodManager_AddFood dlg = new FrmFoodManager_AddFood(this, "添加食材", true, this.foodTypeMap_name);
 			dlg.setVisible(true);
-			if (dlg.getReader() != null) {// 刷新表格
+			if (dlg.getFood() != null) {// 刷新表格
 				this.reloadTable();
 			}
 		} else if (e.getSource() == this.btnModify) {
 			int i = this.foodTable.getSelectedRow();
 			if (i < 0) {
-				JOptionPane.showMessageDialog(null, "请选择读者", "提示", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "请选择食材", "提示", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			FoodInfo food = this.foods.get(i);
 
-			FrmReaderManager_ModifyReader dlg = new FrmReaderManager_ModifyReader(this, "修改读者", true,
-					this.foodTypeMap_name, food);
+			FrmFoodManager_ModifyFood dlg = new FrmFoodManager_ModifyFood(this, "修改读者", true, this.foodTypeMap_name,
+					food);
 			dlg.setVisible(true);
-			if (dlg.getReader() != null) {// 刷新表格
+			if (dlg.getFood() != null) {// 刷新表格
 				this.reloadTable();
 			}
-		} else if (e.getSource() == this.btnDelete) {
-			int i = this.foodTable.getSelectedRow();
-			if (i < 0) {
-				JOptionPane.showMessageDialog(null, "请选择读者", "提示", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			FoodInfo food = this.foods.get(i);
-			if (JOptionPane.showConfirmDialog(this, "确定删除该读者吗？", "确认",
-					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				try {
-					(new FoodManager()).removeFood(food.getReaderid(), SystemUserManager.currentUser.getUserid());
-					this.reloadTable();
-				} catch (BaseException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		} else if (e.getSource() == this.btnSearch) {
-			this.reloadTable();
 		}
+//		else if (e.getSource() == this.btnDelete) {
+//			int i = this.foodTable.getSelectedRow();
+//			if (i < 0) {
+//				JOptionPane.showMessageDialog(null, "请选择读者", "提示", JOptionPane.ERROR_MESSAGE);
+//				return;
+//			}
+//			FoodInfo food = this.foods.get(i);
+//			if (JOptionPane.showConfirmDialog(this, "确定删除该读者吗？", "确认",
+//					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//				try {
+//					(new FoodManager()).removeFood(food.getReaderid(), SystemUserManager.currentUser.getUserid());
+//					this.reloadTable();
+//				} catch (BaseException e1) {
+//					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+//				}
+//
+//			}
+//		} else if (e.getSource() == this.btnSearch) {
+//			this.reloadTable();
+//		}
 	}
 }

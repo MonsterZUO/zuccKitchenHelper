@@ -14,6 +14,114 @@ import KitchenHelper.util.DbException;
 
 public class FoodManager {
 
+	public void modifyFood(FoodInfo r) throws BaseException {
+		if (r.getFoodTypeNo() <= 0) {
+			throw new BusinessException("必须指定食材类别");
+		}
+		if (r.getFoodNo() == null || "".equals(r.getFoodNo()) || r.getFoodNo().length() > 20) {
+			throw new BusinessException("食材编号长度为1-20");
+		}
+		if (r.getFoodName() == null || "".equals(r.getFoodName()) || r.getFoodName().length() > 20) {
+			throw new BusinessException("食材名称必须是1-20个字");
+		}
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select * from foodtypeinfo where foodTypeNo=" + r.getFoodTypeNo();
+			java.sql.Statement st = conn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(sql);
+			if (!rs.next())
+				throw new BusinessException("食材类别不存在");
+			rs.close();
+			st.close();
+			sql = "select * from foodinfo where foodNo=?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, r.getFoodNo());
+			rs = pst.executeQuery();
+			if (!rs.next())
+				throw new BusinessException("食材不存在");
+			rs.close();
+			pst.close();
+			sql = "update foodinfo set foodNo=?,foodName=?,foodTypeNo=?,foodPrice=?,foodAmount=?,foodUnit=?, foodDetail=? where foodNo = ?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, r.getFoodNo());
+			pst.setString(2, r.getFoodName());
+			pst.setInt(3, r.getFoodTypeNo());
+			pst.setDouble(4, r.getFoodPrice());
+			pst.setDouble(5, r.getFoodAmount());
+			pst.setString(6, r.getFoodUnit());
+			pst.setString(7, r.getFoodDetail());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+
+	}
+
+	public void createFood(FoodInfo r) throws BaseException {
+		if (r.getFoodTypeNo() <= 0) {
+			throw new BusinessException("必须指定食材类别");
+		}
+		if (r.getFoodNo() == null || "".equals(r.getFoodNo()) || r.getFoodNo().length() > 20) {
+			throw new BusinessException("食材编号长度必须是1-20");
+		}
+		if (r.getFoodName() == null || "".equals(r.getFoodName()) || r.getFoodName().length() > 20) {
+			throw new BusinessException("读者姓名必须是1-20个字");
+		}
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select * from foodtypeinfo where foodTypeNo=" + r.getFoodTypeNo();
+			java.sql.Statement st = conn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(sql);
+			if (!rs.next())
+				throw new BusinessException("食材类别不存在");
+			rs.close();
+			st.close();
+			sql = "select * from foodinfo where foodNo=?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, r.getFoodNo());
+			rs = pst.executeQuery();
+			if (rs.next())
+				throw new BusinessException("食材编号已经被占用");
+			rs.close();
+			pst.close();
+			sql = "insert into foodinfo(foodNo,foodName,foodTypeNo,foodPrice,foodAmount,foodUnit, foodDetail) values(?,?,?,?,?,?,?)";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, r.getFoodNo());
+			pst.setString(2, r.getFoodName());
+			pst.setInt(3, r.getFoodTypeNo());
+			pst.setDouble(4, r.getFoodPrice());
+			pst.setDouble(5, r.getFoodAmount());
+			pst.setString(6, r.getFoodUnit());
+			pst.setString(7, r.getFoodDetail());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+
+	}
+
 	public List<FoodInfo> searchFood(String keyword, int foodTypeNo) throws BaseException {
 		List<FoodInfo> result = new ArrayList<FoodInfo>();
 		Connection conn = null;
