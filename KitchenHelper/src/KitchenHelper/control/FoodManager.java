@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import KitchenHelper.model.FoodInfo;
 import KitchenHelper.model.FoodTypeInfo;
 import KitchenHelper.util.BaseException;
 import KitchenHelper.util.BusinessException;
@@ -12,6 +13,54 @@ import KitchenHelper.util.DBUtil;
 import KitchenHelper.util.DbException;
 
 public class FoodManager {
+
+	public List<FoodInfo> searchFood(String keyword, int foodTypeNo) throws BaseException {
+		List<FoodInfo> result = new ArrayList<FoodInfo>();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select r.foodNo,r.foodName,r.foodTypeNo,r.foodPrice,r.foodAmount,r.foodUnit,r.foodDetail,rt.foodTypeName"
+					+ "  from foodinfo r,foodtypeinfo rt where r.foodTypeNo=rt.foodTypeNo";
+			if (foodTypeNo > 0)
+				sql += " and r.foodTypeNo=" + foodTypeNo;
+			if (keyword != null && !"".equals(keyword))
+				sql += " and (foodNo like ? or foodName like ?)";
+			sql += " order by foodNo";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			if (keyword != null && !"".equals(keyword)) {
+				pst.setString(1, "%" + keyword + "%");
+				pst.setString(2, "%" + keyword + "%");
+
+			}
+
+			java.sql.ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				FoodInfo r = new FoodInfo();
+				r.setFoodNo(rs.getString(1));
+				r.setFoodName(rs.getString(2));
+				r.setFoodTypeNo(rs.getInt(3));
+				r.setFoodPrice(rs.getDouble(4));
+				r.setFoodAmount(rs.getFloat(5));
+				r.setFoodUnit(rs.getString(6));
+				r.setFoodDetail(rs.getString(7));
+				r.setFoodTypeName(rs.getString(8));
+				result.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return result;
+
+	}
 
 	public void deleteFoodType(int id) throws BaseException {
 		if (id <= 0) {

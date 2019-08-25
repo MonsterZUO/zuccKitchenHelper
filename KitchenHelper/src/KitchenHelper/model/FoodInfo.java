@@ -2,12 +2,14 @@ package KitchenHelper.model;
 
 public class FoodInfo {
 	private String foodNo;
-	private String foodTypeNo;
+	private int foodTypeNo;
 	private String foodName;
 	private double foodPrice;
 	private double foodAmount;
 	private String foodDetail;
 	private String foodUnit;
+
+	private String foodTypeName;
 
 	public String getFoodNo() {
 		return foodNo;
@@ -17,11 +19,11 @@ public class FoodInfo {
 		this.foodNo = foodNo;
 	}
 
-	public String getFoodTypeNo() {
+	public int getFoodTypeNo() {
 		return foodTypeNo;
 	}
 
-	public void setFoodTypeNo(String foodTypeNo) {
+	public void setFoodTypeNo(int foodTypeNo) {
 		this.foodTypeNo = foodTypeNo;
 	}
 
@@ -63,5 +65,13 @@ public class FoodInfo {
 
 	public void setFoodUnit(String foodUnit) {
 		this.foodUnit = foodUnit;
+	}
+
+	public String getFoodTypeName() {
+		return foodTypeName;
+	}
+
+	public void setFoodTypeName(String foodTypeName) {
+		this.foodTypeName = foodTypeName;
 	}
 }
