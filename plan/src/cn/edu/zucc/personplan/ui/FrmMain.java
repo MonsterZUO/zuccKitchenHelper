@@ -85,7 +85,9 @@ public class FrmMain extends JFrame implements ActionListener {
 		this.dataTablePlan.repaint();
 	}
 	private void reloadPlanStepTabel(int planIdx){
-		if(planIdx<0) return;
+		if(planIdx<0) {
+			return;
+		}
 		curPlan=allPlan.get(planIdx);
 		try {
 			planSteps=PersonPlanUtil.stepManager.loadSteps(curPlan);
@@ -95,8 +97,9 @@ public class FrmMain extends JFrame implements ActionListener {
 		}
 		tblStepData =new Object[planSteps.size()][BeanStep.tblStepTitle.length];
 		for(int i=0;i<planSteps.size();i++){
-			for(int j=0;j<BeanStep.tblStepTitle.length;j++)
+			for(int j=0;j<BeanStep.tblStepTitle.length;j++) {
 				tblStepData[i][j]=planSteps.get(i).getCell(j);
+			}
 		}
 		
 		tabStepModel.setDataVector(tblStepData,tblStepTitle);

@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5463e2-5b5b-494c-9ac4-c779e49819f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Booklib/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/Booklib/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/FoodManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/FoodManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/FoodInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/FoodInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/KitchenHelperStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/KitchenHelperStarter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/FoodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/FoodManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/FoodInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/FoodInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/Login$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/Login.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/plan/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExamplePlanManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExamplePlanManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleStepManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleStepManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleUserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleUserManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil2.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/antlr_2_7_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KitchenHelper/KitchenHelper.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/.idea/KitchenHelper.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/zuccKitchenHelper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zuccKitchenHelper.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,80 +19,20 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmLogin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-298">
-              <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="267" />
-    <option name="y" value="47" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="zuccKitchenHelper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zuccKitchenHelper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zuccKitchenHelper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zuccKitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zuccKitchenHelper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zuccKitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zuccKitchenHelper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zuccKitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zuccKitchenHelper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zuccKitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="KitchenHelper" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
+  <component name="ProjectId" id="1Pv7v6opMdrYaLwM8NthOgriJwE" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/附件03：环境配置/环境配置/hibernate/mysql-connector-java-5.1.38.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -132,59 +57,22 @@
       <option name="presentableId" value="Default" />
       <updated>1566716945376</updated>
       <workItem from="1566716946726" duration="71000" />
+      <workItem from="1566742952482" duration="859000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="267" y="47" width="1400" height="1000" extended-state="0" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Key Promoter X" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/KitchenHelper/.project">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-298">
-          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

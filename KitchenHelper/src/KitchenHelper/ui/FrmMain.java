@@ -3,23 +3,22 @@ package KitchenHelper.ui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
+import KitchenHelper.control.RecipeManager;
 import KitchenHelper.control.UserManager;
+import KitchenHelper.model.RecipeInfo;
+import KitchenHelper.model.RecipeStep;
+import KitchenHelper.util.BaseException;
+
 
 public class FrmMain extends JFrame implements ActionListener {
-	private JMenuBar menubar = new JMenuBar();;
-	private JMenu menu_InfoManager = new JMenu("信息维护");
+	private JMenuBar menubar = new JMenuBar();
+	;
 	private JMenu menu_PersonalInfoManager = new JMenu("个人信息管理");
 	private JMenu menu_RecipeManager = new JMenu("菜谱管理");
 	private JMenu menu_BuyManager = new JMenu("采购管理");
@@ -47,6 +46,60 @@ public class FrmMain extends JFrame implements ActionListener {
 	private FrmLogin dlgLogin = null;
 	private JPanel statusBar = new JPanel();
 
+	private Object tblRecipeTitle[] = {"菜谱编号", "菜谱名称", "贡献用户", "菜谱详情", "综合得分", "收藏数", "浏览数"};
+	private Object tblRecipeData[][];
+	DefaultTableModel tabRecipeModel = new DefaultTableModel();
+	private JTable dataTableRecipe = new JTable(tabRecipeModel);
+	private Object tblStepTitle[] = {"菜谱编号", "步骤序号", "步骤详情"};
+	private Object tblStepData[][];
+	DefaultTableModel tabStepModel = new DefaultTableModel();
+	private JTable dataTableStep = new JTable(tabStepModel);
+
+	private RecipeInfo curPlan = null;
+	List<RecipeInfo> allRecipe = null;
+	List<RecipeStep> recipeSteps = null;
+
+	private void reloadRecipeTable() {//这是测试数据，需要用实际数替换
+		try {
+			allRecipe = (new RecipeManager()).loadAll();
+		} catch (BaseException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		tblRecipeData = new Object[allRecipe.size()][tblRecipeTitle.length];
+		for (int i = 0; i < allRecipe.size(); i++) {
+			for (int j = 0; j < tblRecipeTitle.length; j++) {
+				tblRecipeData[i][j] = allRecipe.get(i).getCell(j);
+			}
+		}
+		tabRecipeModel.setDataVector(tblRecipeData, tblRecipeTitle);
+		this.dataTableRecipe.validate();
+		this.dataTableRecipe.repaint();
+	}
+
+	private void reloadRecipeStepTabel(int planIdx) {
+		if (planIdx < 0) {
+			return;
+		}
+		curPlan = allRecipe.get(planIdx);
+		try {
+			recipeSteps = (new RecipeManager()).loadSteps(curPlan);
+		} catch (BaseException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		tblStepData = new Object[recipeSteps.size()][tblStepTitle.length];
+		for (int i = 0; i < recipeSteps.size(); i++) {
+			for (int j = 0; j < tblStepTitle.length; j++) {
+				tblStepData[i][j] = recipeSteps.get(i).getCell(j);
+			}
+		}
+
+		tabStepModel.setDataVector(tblStepData, tblStepTitle);
+		this.dataTableStep.validate();
+		this.dataTableStep.repaint();
+	}
+
 	public FrmMain() {
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setTitle("厨房小帮手");
@@ -60,6 +113,7 @@ public class FrmMain extends JFrame implements ActionListener {
 		menuItem_PersonalInfoUpdate.addActionListener(this);
 		menubar.add(menu_PersonalInfoManager);
 		if ("admin".equals(UserManager.currentUser.getUserType())) {
+			JMenu menu_InfoManager = new JMenu("信息维护");
 			menu_InfoManager.add(menuItem_UserManager);
 			menuItem_UserManager.addActionListener(this);
 			menu_InfoManager.add(menuItem_FoodTypeManager);
@@ -76,18 +130,10 @@ public class FrmMain extends JFrame implements ActionListener {
 			menuItem_BuyDetail.addActionListener(this);
 			menu_BuyManager.add(menuItem_BuyTotal);
 			menuItem_BuyTotal.addActionListener(this);
-			menubar.add(menu_BuyManager);
-		} else if ("buyer".equals(UserManager.currentUser.getUserType())) {
-			menu_BuyManager.add(menuItem_BuyCheck);
-			menuItem_BuyCheck.addActionListener(this);
-			menu_BuyManager.add(menuItem_BuyDetail);
-			menuItem_BuyDetail.addActionListener(this);
-			menu_BuyManager.add(menuItem_BuyTotal);
-			menuItem_BuyTotal.addActionListener(this);
 			menu_BuyManager.add(menuItem_BuyUpdate);
 			menuItem_BuyUpdate.addActionListener(this);
 			menubar.add(menu_BuyManager);
-		} else {
+		} else if ("user".equals(UserManager.currentUser.getUserType())) {
 			menu_RecipeManager.add(menuItem_CheckRecipe);
 			menuItem_CheckRecipe.addActionListener(this);
 			menu_RecipeManager.add(menuItem_CreateRecipe);
@@ -103,6 +149,23 @@ public class FrmMain extends JFrame implements ActionListener {
 		}
 
 		this.setJMenuBar(menubar);
+
+		this.getContentPane().add(new JScrollPane(this.dataTableRecipe), BorderLayout.WEST);
+		this.dataTableRecipe.addMouseListener(new MouseAdapter (){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i=FrmMain.this.dataTableRecipe.getSelectedRow();
+				if(i<0) {
+					return;
+				}
+				FrmMain.this.reloadRecipeStepTabel(i);
+			}
+
+		});
+		this.getContentPane().add(new JScrollPane(this.dataTableStep), BorderLayout.CENTER);
+
+		this.reloadRecipeTable();
 		// 状态栏
 		statusBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel label = new JLabel("您好!" + UserManager.currentUser.getUserName());
@@ -141,7 +204,8 @@ public class FrmMain extends JFrame implements ActionListener {
 //		else if (e.getSource() == this.menuItem_BookManager) {
 //			FrmBookManager dlg = new FrmBookManager(this, "图书管理", true);
 //			dlg.setVisible(true);
-//		} else if (e.getSource() == this.menuItem_Lend) {
+//		}
+//		else if (e.getSource() == this.menuItem_Lend) {
 //			FrmLend dlg = new FrmLend(this, "借阅", true);
 //			dlg.setVisible(true);
 //		} else if (e.getSource() == this.menuItem_Return) {

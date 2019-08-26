@@ -58,6 +58,7 @@ public class FrmFoodManager extends JDialog implements ActionListener {
 			}
 			foods = (new FoodManager()).searchFood(this.edtKeyword.getText(), rtId);
 			tblData = new Object[foods.size()][7];
+			System.out.println(foods.size());
 			for (int i = 0; i < foods.size(); i++) {
 				tblData[i][0] = foods.get(i).getFoodNo();
 				tblData[i][1] = foods.get(i).getFoodName();

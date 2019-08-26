@@ -31,7 +31,7 @@ public class FrmUserManager_AddUser extends JDialog implements ActionListener {
 
 	private JTextField edtUserid = new JTextField(20);
 	private JTextField edtUsername = new JTextField(20);
-	private JComboBox cmbUsertype = new JComboBox(new String[] { "admin", "buyer" });
+	private JComboBox cmbUsertype = new JComboBox(new String[] { "admin" });
 
 	public FrmUserManager_AddUser(JDialog f, String s, boolean b) {
 		super(f, s, b);

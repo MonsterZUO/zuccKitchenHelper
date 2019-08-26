@@ -1,6 +1,14 @@
 package KitchenHelper.model;
 
 public class RecipeStep {
+	//	private Object tblStepTitle[] = {"²ËÆ×±àºÅ", "²½ÖèĞòºÅ", "²½ÖèÏêÇé"};
+	public String getCell(int col) {
+		if (col == 0) return recipeNo;
+		else if (col == 1) return String.valueOf(stepNo);
+		else if (col == 2) return stepDetail;
+		else return "";
+	}
+
 	private String recipeNo;
 	private int stepNo;
 	private String stepDetail;

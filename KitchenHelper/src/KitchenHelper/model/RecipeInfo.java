@@ -1,6 +1,19 @@
 package KitchenHelper.model;
 
 public class RecipeInfo {
+
+	//	private Object tblRecipeTitle[]={"菜谱编号", "菜谱名称", "贡献用户", "菜谱详情", "综合得分", "收藏数", "浏览数"};
+	public String getCell(int col) {
+		if (col == 0) return String.valueOf(recipeNo);
+		else if (col == 1) return recipeName;
+		else if (col == 2) return userNo;
+		else if (col == 3) return recipeDetail;
+		else if (col == 4) return String.valueOf(scoreTotal);
+		else if (col == 5) return String.valueOf(collectCount);
+		else if (col == 6) return String.valueOf(lookCount);
+		else return "";
+	}
+
 	private String recipeNo;
 	private String recipeName;
 	private String userNo;
