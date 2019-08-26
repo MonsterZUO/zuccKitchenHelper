@@ -3,6 +3,7 @@ package KitchenHelper.control;
 import KitchenHelper.model.RecipeInfo;
 import KitchenHelper.model.RecipeStep;
 import KitchenHelper.util.BaseException;
+import KitchenHelper.util.BusinessException;
 import KitchenHelper.util.DBUtil;
 import KitchenHelper.util.DbException;
 
@@ -81,5 +82,49 @@ public class RecipeManager {
         }
         return result;
 
+    }
+
+    public void createRecipe(RecipeInfo recipe) throws BaseException {
+        // TODO Auto-generated method stub
+        Connection conn = null;
+        if (recipe == null || "".equals(recipe))
+            throw new BusinessException("菜谱名称不能为空");
+        if (" ".equals(recipe))
+            throw new BusinessException("菜谱名不能为空格");
+        try {
+            conn = DBUtil.getConnection();
+//            String sql = "select max(plan_Order) from tbl_plan where user_Id=?";
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setString(1, UserManager.currentUser.getUserNo());
+//            java.sql.ResultSet rs = pst.executeQuery();
+//            int i = 1;
+//            while (rs.next()) {
+//                i += rs.getInt(1);
+//            }
+//            rs.close();
+//            pst.close();
+            String sql = "insert into recipeinfo (recipeno,recipename,userno,recipeDetail,scoreTotal,collectcount,lookcount) values(?,?,?,?,?,?,?)";
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, recipe.getRecipeNo());
+            pst.setString(2, recipe.getRecipeName());
+            pst.setString(3, UserManager.currentUser.getUserNo());
+            pst.setString(4, recipe.getRecipeDetail());
+            pst.setInt(5, 0);
+            pst.setInt(6, 0);
+            pst.setInt(7, 0);
+            pst.execute();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DbException(e);
+        } finally {
+            if (conn != null)
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+        }
     }
 }

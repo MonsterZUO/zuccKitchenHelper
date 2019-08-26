@@ -5,10 +5,7 @@ import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -55,6 +52,8 @@ public class FrmLogin extends JDialog implements ActionListener {
 
 		btnLogin.addActionListener(this);
 		btnCancel.addActionListener(this);
+		edtPwd.addActionListener(this);
+
 		this.btnRegister.addActionListener(this);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -65,7 +64,7 @@ public class FrmLogin extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == this.btnLogin) {
+		if (e.getSource() == this.btnLogin || e.getSource() == this.edtPwd) {
 			UserManager sum = new UserManager();
 			String userid = this.edtUserId.getText();
 			String pwd = new String(this.edtPwd.getPassword());

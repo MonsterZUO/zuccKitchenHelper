@@ -19,6 +19,7 @@ import cn.edu.zucc.personplan.PersonPlanUtil;
 import cn.edu.zucc.personplan.util.BaseException;
 
 
+
 public class FrmAddPlan extends JDialog implements ActionListener {
 	
 	private JPanel toolBar = new JPanel();
