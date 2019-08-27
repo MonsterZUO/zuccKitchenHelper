@@ -51,6 +51,7 @@ public class FoodManager {
 			pst.setDouble(5, r.getFoodAmount());
 			pst.setString(6, r.getFoodUnit());
 			pst.setString(7, r.getFoodDetail());
+			pst.setString(8, r.getFoodNo());
 			pst.execute();
 			pst.close();
 		} catch (SQLException e) {
@@ -304,6 +305,35 @@ public class FoodManager {
 				rt.setFoodTypeName(name);
 				rt.setFoodTypeDetail(detail);
 				result.add(rt);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return result;
+	}
+
+	public List<FoodInfo> loadAllFoodName() throws BaseException{
+		List<FoodInfo> result = new ArrayList<FoodInfo>();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select foodNo,foodName from foodinfo order by foodNo";
+			java.sql.Statement st = conn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				FoodInfo r = new FoodInfo();
+				r.setFoodNo(rs.getString(1));
+				r.setFoodName(rs.getString(2));
+				result.add(r);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

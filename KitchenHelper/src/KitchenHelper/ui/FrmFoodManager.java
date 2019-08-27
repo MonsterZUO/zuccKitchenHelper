@@ -80,8 +80,8 @@ public class FrmFoodManager extends JDialog implements ActionListener {
 
 	public FrmFoodManager(Frame f, String s, boolean b) {
 		super(f, s, b);
-		// 提取读者类别信息
-		List<FoodTypeInfo> types = null;
+		// 提取食材类别信息
+		List<FoodTypeInfo> types;
 		try {
 			types = (new FoodManager()).loadAllFoodType();
 			String[] strTypes = new String[types.size() + 1];
@@ -146,7 +146,7 @@ public class FrmFoodManager extends JDialog implements ActionListener {
 			}
 			FoodInfo food = this.foods.get(i);
 
-			FrmFoodManager_ModifyFood dlg = new FrmFoodManager_ModifyFood(this, "修改读者", true, this.foodTypeMap_name,
+			FrmFoodManager_ModifyFood dlg = new FrmFoodManager_ModifyFood(this, "修改食材", true, this.foodTypeMap_name,
 					food);
 			dlg.setVisible(true);
 			if (dlg.getFood() != null) {// 刷新表格

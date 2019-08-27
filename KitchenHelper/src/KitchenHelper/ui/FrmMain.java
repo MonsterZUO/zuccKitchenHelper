@@ -46,60 +46,6 @@ public class FrmMain extends JFrame implements ActionListener {
 	private FrmLogin dlgLogin = null;
 	private JPanel statusBar = new JPanel();
 
-//	private Object tblRecipeTitle[] = {"菜谱编号", "菜谱名称", "贡献用户", "菜谱详情", "综合得分", "收藏数", "浏览数"};
-//	private Object tblRecipeData[][];
-//	DefaultTableModel tabRecipeModel = new DefaultTableModel();
-//	private JTable dataTableRecipe = new JTable(tabRecipeModel);
-//	private Object tblStepTitle[] = {"菜谱编号", "步骤序号", "步骤详情"};
-//	private Object tblStepData[][];
-//	DefaultTableModel tabStepModel = new DefaultTableModel();
-//	private JTable dataTableStep = new JTable(tabStepModel);
-//
-//	private RecipeInfo curPlan = null;
-//	List<RecipeInfo> allRecipe = null;
-//	List<RecipeStep> recipeSteps = null;
-//
-//	private void reloadRecipeTable() {//这是测试数据，需要用实际数替换
-//		try {
-//			allRecipe = (new RecipeManager()).loadAll();
-//		} catch (BaseException e) {
-//			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-//			return;
-//		}
-//		tblRecipeData = new Object[allRecipe.size()][tblRecipeTitle.length];
-//		for (int i = 0; i < allRecipe.size(); i++) {
-//			for (int j = 0; j < tblRecipeTitle.length; j++) {
-//				tblRecipeData[i][j] = allRecipe.get(i).getCell(j);
-//			}
-//		}
-//		tabRecipeModel.setDataVector(tblRecipeData, tblRecipeTitle);
-//		this.dataTableRecipe.validate();
-//		this.dataTableRecipe.repaint();
-//	}
-//
-//	private void reloadRecipeStepTabel(int planIdx) {
-//		if (planIdx < 0) {
-//			return;
-//		}
-//		curPlan = allRecipe.get(planIdx);
-//		try {
-//			recipeSteps = (new RecipeManager()).loadSteps(curPlan);
-//		} catch (BaseException e) {
-//			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-//			return;
-//		}
-//		tblStepData = new Object[recipeSteps.size()][tblStepTitle.length];
-//		for (int i = 0; i < recipeSteps.size(); i++) {
-//			for (int j = 0; j < tblStepTitle.length; j++) {
-//				tblStepData[i][j] = recipeSteps.get(i).getCell(j);
-//			}
-//		}
-//
-//		tabStepModel.setDataVector(tblStepData, tblStepTitle);
-//		this.dataTableStep.validate();
-//		this.dataTableStep.repaint();
-//	}
-
 	public FrmMain() {
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setTitle("厨房小帮手");
@@ -147,23 +93,6 @@ public class FrmMain extends JFrame implements ActionListener {
 		}
 
 		this.setJMenuBar(menubar);
-
-//		this.getContentPane().add(new JScrollPane(this.dataTableRecipe), BorderLayout.WEST);
-//		this.dataTableRecipe.addMouseListener(new MouseAdapter() {
-//
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				int i = FrmMain.this.dataTableRecipe.getSelectedRow();
-//				if (i < 0) {
-//					return;
-//				}
-//				FrmMain.this.reloadRecipeStepTabel(i);
-//			}
-//
-//		});
-//		this.getContentPane().add(new JScrollPane(this.dataTableStep), BorderLayout.CENTER);
-//
-//		this.reloadRecipeTable();
 		// 状态栏
 		statusBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel label = new JLabel("您好!" + UserManager.currentUser.getUserName());
@@ -176,12 +105,6 @@ public class FrmMain extends JFrame implements ActionListener {
 		});
 		this.setVisible(true);
 	}
-
-//	@Override
-//	public void actionPerformed(ActionEvent arg0) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -203,25 +126,5 @@ public class FrmMain extends JFrame implements ActionListener {
 			FrmRecipeManager dlg = new FrmRecipeManager(this, "菜谱管理", true);
 			dlg.setVisible(true);
 		}
-//		else if (e.getSource() == this.menuItem_Lend) {
-//			FrmLend dlg = new FrmLend(this, "借阅", true);
-//			dlg.setVisible(true);
-//		}
-//		else if (e.getSource() == this.menuItem_Return) {
-//			FrmReturn dlg = new FrmReturn(this, "归还", true);
-//			dlg.setVisible(true);
-//		} else if (e.getSource() == this.menuItem_BookLendSearch) {
-//			FrmBookLendSearch dlg = new FrmBookLendSearch(this, "图书借阅情况查询", true);
-//			dlg.setVisible(true);
-//		} else if (e.getSource() == this.menuItem_ReaderLendSearch) {
-//			FrmReaderLendSearch dlg = new FrmReaderLendSearch(this, "读者借阅情况查询", true);
-//			dlg.setVisible(true);
-//		} else if (e.getSource() == this.menuItem_BookLendStatic) {
-//			FrmBookLendStatic dlg = new FrmBookLendStatic(this, "图书借阅统计", true);
-//			dlg.setVisible(true);
-//		} else if (e.getSource() == this.menuItem_ReaderLendStatic) {
-//			FrmReaderLendStatic dlg = new FrmReaderLendStatic(this, "读者借阅统计", true);
-//			dlg.setVisible(true);
-//		}
 	}
 }

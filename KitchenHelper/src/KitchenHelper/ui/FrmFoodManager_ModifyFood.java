@@ -62,7 +62,7 @@ public class FrmFoodManager_ModifyFood extends JDialog implements ActionListener
 		this.edtName.setText(r.getFoodName());
 		workPane.add(edtName);
 		workPane.add(labelFoodType);
-		// 提取读者类别信息
+		// 提取类别信息
 		String[] strTypes = new String[this.foodTypeMap_name.size() + 1];
 		strTypes[0] = "";
 		java.util.Iterator<FoodTypeInfo> itRt = this.foodTypeMap_name.values().iterator();

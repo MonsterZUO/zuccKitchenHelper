@@ -2,4 +2,7 @@
 <component LANGUAGE_LEVEL="JDK_10" inheritJdk="true">
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="antlr-2.7.7" value="project"/>
+	</levels>
 </component>

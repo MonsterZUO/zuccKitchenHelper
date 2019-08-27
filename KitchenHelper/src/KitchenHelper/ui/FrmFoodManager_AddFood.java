@@ -41,8 +41,8 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 	private JTextField edtAmount = new JTextField(20);
 	private JTextField edtUnit = new JTextField(20);
 	private JTextField edtDetail = new JTextField(20);
-	private Map<String, FoodTypeInfo> foodTypeMap_name = null;
-	private JComboBox cmbFoodtype = null;
+	private Map<String, FoodTypeInfo> foodTypeMap_name;
+	private JComboBox cmbFoodtype;
 
 	public FrmFoodManager_AddFood(JDialog f, String s, boolean b, Map<String, FoodTypeInfo> rtMap) {
 		super(f, s, b);
@@ -57,7 +57,7 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 		workPane.add(edtName);
 		workPane.add(labelFoodType);
 
-		// 提取读者类别信息
+		// 提取食材类别信息
 		String[] strTypes = new String[this.foodTypeMap_name.size() + 1];
 		strTypes[0] = "";
 		java.util.Iterator<FoodTypeInfo> itRt = this.foodTypeMap_name.values().iterator();
@@ -99,19 +99,13 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(null, "请选择食材类别", "错误", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			String id = this.edtId.getText();
-			String name = this.edtName.getText();
-			double price = Double.parseDouble(this.edtPrice.getText());
-			double amount = Double.parseDouble(this.edtAmount.getText());
-			String unit = this.edtUnit.getText();
-			String detail = this.edtDetail.getText();
 			FoodInfo r = new FoodInfo();
-			r.setFoodNo(id);
-			r.setFoodName(name);
-			r.setFoodPrice(price);
-			r.setFoodAmount(amount);
-			r.setFoodUnit(unit);
-			r.setFoodDetail(detail);
+			r.setFoodNo(this.edtId.getText());
+			r.setFoodName(this.edtName.getText());
+			r.setFoodPrice(Double.parseDouble(this.edtPrice.getText()));
+			r.setFoodAmount(Double.parseDouble(this.edtAmount.getText()));
+			r.setFoodUnit(this.edtUnit.getText());
+			r.setFoodDetail(this.edtDetail.getText());
 			String rtName = this.cmbFoodtype.getSelectedItem().toString();
 			FoodTypeInfo rt = this.foodTypeMap_name.get(rtName);
 			if (rt == null) {
