@@ -1,5 +1,6 @@
 package KitchenHelper.control;
 
+import KitchenHelper.model.FoodInfo;
 import KitchenHelper.model.RecipeInfo;
 import KitchenHelper.model.RecipeStep;
 import KitchenHelper.model.RecipeUse;
@@ -15,14 +16,21 @@ import java.util.List;
 
 public class RecipeManager {
 
-	public List<RecipeInfo> loadAll() throws BaseException {
+	public List<RecipeInfo> loadAll(String keyword) throws BaseException {
 		List<RecipeInfo> result = new ArrayList<RecipeInfo>();
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "select * from recipeinfo where userNo=? order by recipeNo";
+			String sql = "select * from recipeinfo ";
+			if(keyword!=null && !"".equals(keyword)) {
+				sql+=" where (recipeNo like ? or recipeName like ?)";
+			}
+			sql+=" order by recipeNo";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-			pst.setString(1, UserManager.currentUser.getUserNo());
+			if(keyword!=null && !"".equals(keyword)){
+				pst.setString(1, "%"+keyword+"%");
+				pst.setString(2, "%"+keyword+"%");
+			}
 			java.sql.ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				RecipeInfo p = new RecipeInfo();
@@ -90,16 +98,17 @@ public class RecipeManager {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "SELECT r.recipeNo, f.foodName, r.amount, r.unit from recipeuse r, foodinfo f WHERE r.recipeNo = ? and r.foodNo = f.foodNo";
+			String sql = "SELECT r.recipeNo,r.foodno, f.foodName, r.amount, r.unit from recipeuse r, foodinfo f WHERE r.recipeNo = ? and r.foodNo = f.foodNo";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, recipe.getRecipeNo());
 			java.sql.ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				RecipeUse s = new RecipeUse();
 				s.setRecipeNo(rs.getString(1));
-				s.setFoodName(rs.getString(2));
-				s.setAmount(rs.getDouble(3));
-				s.setUnit(rs.getString(4));
+				s.setFoodNo(rs.getString(2));
+				s.setFoodName(rs.getString(3));
+				s.setAmount(rs.getDouble(4));
+				s.setUnit(rs.getString(5));
 				result.add(s);
 			}
 			rs.close();
@@ -180,8 +189,17 @@ public class RecipeManager {
 //            }
 //            rs.close();
 //            pst.close();
-			String sql = "insert into recipestep (recipeno,stepno,stepDetail) values(?,?,?)";
+			String sql = "select * from recipestep where recipeno = "+recipeStep.getRecipeNo()
+					+" and stepno = "+recipeStep.getStepNo();
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			java.sql.ResultSet rs = pst.executeQuery(sql);
+			if (rs.next()) {
+				throw new BusinessException("步骤已存在,请进行修改或删除操作!");
+			}
+			pst.close();
+			rs.close();
+			sql = "insert into recipestep (recipeno,stepno,stepDetail) values(?,?,?)";
+			pst = conn.prepareStatement(sql);
 			pst.setString(1, recipeStep.getRecipeNo());
 			pst.setInt(2, recipeStep.getStepNo());
 			pst.setString(3, recipeStep.getStepDetail());
@@ -205,8 +223,18 @@ public class RecipeManager {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "insert into recipeuse (recipeno,foodno,amount,unit) values(?,?,?,?)";
+			String sql = "select * from recipeuse where recipeno = ? and foodno = ?";
 			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeUse.getRecipeNo());
+			pst.setString(2, recipeUse.getFoodNo());
+			java.sql.ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				throw new BusinessException("食材已存在,请进行修改或删除操作!");
+			}
+			rs.close();
+			pst.close();
+			sql = "insert into recipeuse (recipeno,foodno,amount,unit) values(?,?,?,?)";
+			pst = conn.prepareStatement(sql);
 			pst.setString(1, recipeUse.getRecipeNo());
 			pst.setString(2, recipeUse.getFoodNo());
 			pst.setDouble(3, recipeUse.getAmount());
@@ -226,4 +254,288 @@ public class RecipeManager {
 				}
 		}
 	}
+
+	public void modifyRecipe(RecipeInfo r, String oldRecipeNo) throws BaseException {
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+//			String sql = "select * from recipeinfo where recipeNo=" + oldRecipeNo;
+//			java.sql.Statement st = conn.createStatement();
+//			java.sql.ResultSet rs = st.executeQuery(sql);
+//			if (!rs.next())
+//				throw new BusinessException("菜谱不存在");
+//			rs.close();
+//			st.close();
+			String sql = "update recipeinfo set recipeno=?,recipename=?,recipeDetail=? where recipeNo = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, r.getRecipeNo());
+			pst.setString(2, r.getRecipeName());
+			pst.setString(3, r.getRecipeDetail());
+			pst.setString(4, oldRecipeNo);
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+
+	}
+
+	public void removeRecipe(String recipeNo) throws BaseException {
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select * from recipeinfo where recipeNo='" + recipeNo + "'";
+			java.sql.Statement st = conn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(sql);
+			if (!rs.next())
+				throw new BusinessException("菜谱不存在");
+			rs.close();
+			st.close();
+			sql = "delete from recipeinfo where recipeNo = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeNo);
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+
+	}
+
+//	public RecipeUse searchRecipeUse(RecipeStep recipeStep) throws BaseException {
+//		RecipeUse ru = new RecipeUse();
+//		Connection conn = null;
+//		try {
+//			conn = DBUtil.getConnection();
+//			String sql = "select * from recipeUse where recipeNo = ? and foodNo = ?";
+//			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//			pst.setString(1, recipeStep.getRecipeNo());
+//			pst.setString(2, recipeStep.getFoodNo());
+//			java.sql.ResultSet rs = pst.executeQuery();
+//			if (!rs.next()) {
+//				throw new BusinessException("无记录");
+//			} else {
+//				ru.setRecipeNo(rs.getString(1));
+//				ru.setFoodNo(rs.getString(2));
+//				ru.setAmount(rs.getDouble(3));
+//				ru.setUnit(rs.getString(4));
+//			}
+//			rs.close();
+//			pst.close();
+//			return ru;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new DbException(e);
+//		} finally {
+//			if (conn != null)
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//		}
+//
+//	}
+
+
+//	public void modifyRecipeStep(RecipeStep recipeStep) throws BaseException {
+//		Connection conn = null;
+//		try {
+//			conn = DBUtil.getConnection();
+//			String sql = "select * from recipeStep where recipeNo=" + recipeStep.getRecipeNo()
+//					+ "and stepno =" + recipeStep.getStepNo();
+//			java.sql.Statement st = conn.createStatement();
+//			java.sql.ResultSet rs = st.executeQuery(sql);
+//			if (!rs.next())
+//				throw new BusinessException("记录不存在");
+//			rs.close();
+//			st.close();
+//			sql = "update recipestep set recipeno=?,stepno=?,foodno=?, stepdetail = ? where recipeNo = ? and " +
+//					"stepno = ?";
+//			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//			pst.setString(1, recipeStep.getRecipeNo());
+//			pst.setInt(2, recipeStep.getStepNo());
+//			pst.setString(3, recipeStep.getFoodNo());
+//			pst.setString(4, recipeStep.getStepDetail());
+//			pst.setString(5, recipeStep.getRecipeNo());
+//			pst.setInt(6, recipeStep.getStepNo());
+//			pst.execute();
+//			pst.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			throw new DbException(e);
+//		} finally {
+//			if (conn != null)
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//		}
+//
+//	}
+
+	public void modifyRecipeUse(RecipeUse recipeUse, String newFoodNo) throws BaseException {
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "update recipeuse set recipeno=?,foodno=?,amount=?, unit = ? where recipeNo = ? and " +
+					"foodno = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeUse.getRecipeNo());
+			pst.setString(2, newFoodNo);
+			pst.setDouble(3, recipeUse.getAmount());
+			pst.setString(4, recipeUse.getUnit());
+			pst.setString(5, recipeUse.getRecipeNo());
+			pst.setString(6, recipeUse.getFoodNo());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+
+	}
+
+	public void removeRecipeFood(RecipeUse recipeUse) throws BaseException{
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+//			String sql = "select * from recipeuse where recipeNo=" + recipeUse.getRecipeNo()
+//					+ "and foodno =" + recipeUse.getFoodNo();
+//			java.sql.Statement st = conn.createStatement();
+//			java.sql.ResultSet rs = st.executeQuery(sql);
+//			if (!rs.next())
+//				throw new BusinessException("步骤不存在");
+//			rs.close();
+//			st.close();
+			String sql = "delete from recipeuse where recipeNo= ? and foodno =?" ;
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeUse.getRecipeNo());
+			pst.setString(2, recipeUse.getFoodNo());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
+
+	public void modifyRecipeStep(RecipeStep recipeStep) throws BaseException{
+		Connection conn = null;
+		if ("".equals(recipeStep.getStepNo()))
+			throw new BusinessException("步骤编号不能为空");
+		try {
+			conn = DBUtil.getConnection();
+//            String sql = "select max(plan_Order) from tbl_plan where user_Id=?";
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.setString(1, UserManager.currentUser.getUserNo());
+//            java.sql.ResultSet rs = pst.executeQuery();
+//            int i = 1;
+//            while (rs.next()) {
+//                i += rs.getInt(1);
+//            }
+//            rs.close();
+//            pst.close();
+			String sql = "select * from recipestep where recipeno = ? and stepno = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeStep.getRecipeNo());
+			pst.setInt(2, recipeStep.getStepNo());
+			java.sql.ResultSet rs = pst.executeQuery();
+			if (!rs.next()) {
+				throw new BusinessException("步骤不存在!");
+			}
+			pst.close();
+			rs.close();
+			sql = "update recipestep set stepDetail=? where recipeNo = ? and stepno = ?";
+//			update recipeuse set recipeno=?,foodno=?,amount=?, unit = ? where recipeNo = ? and " + "foodno =
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, recipeStep.getStepDetail());
+			pst.setString(2, recipeStep.getRecipeNo());
+			pst.setInt(3, recipeStep.getStepNo());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
+
+	public void removeRecipeStep(RecipeStep recipeStep) throws BaseException {
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "select * from recipestep where recipeno = "+recipeStep.getRecipeNo()
+					+" and stepno = "+recipeStep.getStepNo();
+			java.sql.Statement st = conn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(sql);
+			if (!rs.next())
+				throw new BusinessException("步骤不存在");
+			rs.close();
+			st.close();
+			sql = "delete from recipeStep where recipeno = "+recipeStep.getRecipeNo()
+					+" and stepno = "+recipeStep.getStepNo();
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DbException(e);
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
+
+
 }

@@ -32,7 +32,7 @@ public class FrmMain extends JFrame implements ActionListener {
 	private JMenuItem menuItem_PersonalInfoUpdate = new JMenuItem("信息完善");
 
 	private JMenuItem menuItem_SearchRecipe = new JMenuItem("查询菜谱");
-//	private JMenuItem menuItem_CreateRecipe = new JMenuItem("创建菜谱");
+	//	private JMenuItem menuItem_CreateRecipe = new JMenuItem("创建菜谱");
 	private JMenuItem menuItem_RecipeManager = new JMenuItem("菜谱管理");
 
 	private JMenuItem menuItem_OrderCheck = new JMenuItem("订单查询");
@@ -121,8 +121,7 @@ public class FrmMain extends JFrame implements ActionListener {
 		} else if (e.getSource() == this.menuItem_FoodManager) {
 			FrmFoodManager dlg = new FrmFoodManager(this, "食材管理", true);
 			dlg.setVisible(true);
-		}
-		else if (e.getSource() == this.menuItem_RecipeManager) {
+		} else if (e.getSource() == this.menuItem_RecipeManager) {
 			FrmRecipeManager dlg = new FrmRecipeManager(this, "菜谱管理", true);
 			dlg.setVisible(true);
 		}

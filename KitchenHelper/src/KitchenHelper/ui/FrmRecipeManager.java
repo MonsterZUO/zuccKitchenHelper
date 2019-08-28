@@ -21,6 +21,9 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 	private Button btnAddStep = new Button("添加步骤");
 	private Button btnModifyStep = new Button("修改步骤");
 	private Button btnDeleteStep = new Button("删除步骤");
+	private Button btnAddFood = new Button("添加食材");
+	private Button btnModifyFood = new Button("修改食材");
+	private Button btnDeleteFood = new Button("删除食材");
 	private Map<String, FoodInfo> foodMap_name = new HashMap<String, FoodInfo>();
 	private Map<String, FoodInfo> foodMap_id = new HashMap<String, FoodInfo>();
 	private JComboBox cmbFoodName = null;
@@ -50,7 +53,7 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 
 	private void reloadRecipeTable() {//这是测试数据，需要用实际数替换
 		try {
-			allRecipe = (new RecipeManager()).loadAll();
+			allRecipe = (new RecipeManager()).loadAll(this.edtKeyword.getText());
 		} catch (BaseException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -153,6 +156,9 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		toolBar.add(btnAdd);
 		toolBar.add(btnModify);
 		toolBar.add(this.btnDelete);
+		toolBar.add(btnAddFood);
+		toolBar.add(btnModifyFood);
+		toolBar.add(this.btnDeleteFood);
 		toolBar.add(btnAddStep);
 		toolBar.add(btnModifyStep);
 		toolBar.add(this.btnDeleteStep);
@@ -170,6 +176,9 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		this.btnAdd.addActionListener(this);
 		this.btnModify.addActionListener(this);
 		this.btnDelete.addActionListener(this);
+		this.btnAddFood.addActionListener(this);
+		this.btnModifyFood.addActionListener(this);
+		this.btnDeleteFood.addActionListener(this);
 		this.btnSearch.addActionListener(this);
 		this.btnAddStep.addActionListener(this);
 		this.btnModifyStep.addActionListener(this);
@@ -192,41 +201,81 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 			if (dlg.getRecipe() != null) {// 刷新表格
 				this.reloadRecipeTable();
 			}
-		}
-//		else if (e.getSource() == this.btnModify) {
-//			int i = this.foodTable.getSelectedRow();
-//			if (i < 0) {
-//				JOptionPane.showMessageDialog(this, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
-//				return;
-//			}
-//			FoodInfo food = this.foods.get(i);
-//
-//			FrmFoodManager_ModifyFood dlg = new FrmFoodManager_ModifyFood(this, "修改菜谱", true, this.foodTypeMap_name,
-//					food);
-//			dlg.setVisible(true);
-//			if (dlg.getFood() != null) {// 刷新表格
-//				this.reloadTable();
-//			}
-//		}
-//		else if (e.getSource() == this.btnDelete) {
-//			int i = this.foodTable.getSelectedRow();
-//			if (i < 0) {
-//				JOptionPane.showMessageDialog(null, "请选择读者", "提示", JOptionPane.ERROR_MESSAGE);
-//				return;
-//			}
-//			FoodInfo food = this.foods.get(i);
-//			if (JOptionPane.showConfirmDialog(this, "确定删除该读者吗？", "确认",
-//					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//				try {
-//					(new FoodManager()).removeFood(food.getReaderid(), SystemUserManager.currentUser.getUserid());
-//					this.reloadTable();
-//				} catch (BaseException e1) {
-//					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
-//				}
-//
-//			}
-//		}
-		else if (e.getSource() == this.btnAddStep) {
+		} else if (e.getSource() == this.btnModify) {
+			int i = this.dataTableRecipe.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(this, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeInfo recipe = this.allRecipe.get(i);
+
+			FrmRecipeManager_ModifyRecipe dlg = new FrmRecipeManager_ModifyRecipe(this, "修改菜谱", true,
+					recipe);
+			dlg.setVisible(true);
+			if (dlg.getRecipe() != null) {// 刷新表格
+				this.reloadRecipeTable();
+			}
+		} else if (e.getSource() == this.btnDelete) {
+			int i = this.dataTableRecipe.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeInfo recipe = this.allRecipe.get(i);
+			if (JOptionPane.showConfirmDialog(this, "确定删除该菜谱吗？", "确认",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				try {
+					(new RecipeManager()).removeRecipe(recipe.getRecipeNo());
+					this.reloadRecipeTable();
+				} catch (BaseException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+		} else if (e.getSource() == this.btnAddFood) {
+			int i = this.dataTableRecipe.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeInfo recipe = this.allRecipe.get(i);
+			FrmRecipeManager_AddRecipeFood dlg = new FrmRecipeManager_AddRecipeFood(this, "添加食材", true, this.foodMap_name,
+					recipe);
+			dlg.setVisible(true);
+			if (dlg.getRecipeUse() != null) {// 刷新表格
+				this.reloadRecipeUseTable(i);
+			}
+		} else if (e.getSource() == this.btnModifyFood) {
+			int i = this.dataTableRecipeUse.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeUse recipeUse = this.recipeUse.get(i);
+			FrmRecipeManager_ModifyRecipeFood dlg = new FrmRecipeManager_ModifyRecipeFood(this, "添加食材", true, this.foodMap_name,
+					recipeUse);
+			dlg.setVisible(true);
+			if (dlg.getRecipeUse() != null) {// 刷新表格
+				this.reloadRecipeUseTable(i);
+			}
+		} else if (e.getSource() == this.btnDeleteFood) {
+			int i = this.dataTableRecipeUse.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeUse recipeUse = this.recipeUse.get(i);
+			if (JOptionPane.showConfirmDialog(this, "确定删除该步骤吗？", "确认",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				try {
+					(new RecipeManager()).removeRecipeFood(recipeUse);
+					this.reloadRecipeUseTable(i);
+				} catch (BaseException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+		} else if (e.getSource() == this.btnAddStep) {
 			int i = this.dataTableRecipe.getSelectedRow();
 			if (i < 0) {
 				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
@@ -234,20 +283,46 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 			}
 			RecipeInfo recipe = this.allRecipe.get(i);
 
-			FrmRecipeManager_AddRecipeStep dlg;
-			dlg = new FrmRecipeManager_AddRecipeStep(this, "添加步骤", true, this.foodMap_name,
+			FrmRecipeManager_AddRecipeStep dlg = new FrmRecipeManager_AddRecipeStep(this, "添加步骤", true,
 					recipe);
 			dlg.setVisible(true);
 			if (dlg.getRecipeStep() != null) {// 刷新表格
 				this.reloadRecipeStepTable(i);
 			}
-			if (dlg.getRecipeUse() != null) {// 刷新表格
-				this.reloadRecipeUseTable(i);
+		} else if (e.getSource() == this.btnModifyStep) {
+			int i = this.dataTableStep.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择步骤", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeStep recipeStep = this.recipeSteps.get(i);
+			FrmRecipeManager_ModifyRecipeStep dlg = new FrmRecipeManager_ModifyRecipeStep(this, "修改步骤", true, recipeStep);
+			dlg.setVisible(true);
+			if (dlg.getRecipeStep() != null) {// 刷新表格
+				this.reloadRecipeStepTable(i);
+			}
+		} else if (e.getSource() == this.btnDeleteStep) {
+			int i = this.dataTableStep.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择步骤", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			RecipeStep recipeStep = this.recipeSteps.get(i);
+			if (JOptionPane.showConfirmDialog(this, "确定删除该步骤吗？", "确认",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				try {
+					(new RecipeManager()).removeRecipeStep(recipeStep);
+					this.reloadRecipeStepTable(i);
+				} catch (BaseException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		}
-//		else if (e.getSource() == this.btnSearch) {
-//			this.reloadTable();
-//		}
+		else if (e.getSource() == this.btnSearch) {
+			this.reloadRecipeTable();
+		}
 
 	}
 }

@@ -1,18 +1,19 @@
 package KitchenHelper.ui;
 
-import KitchenHelper.control.FoodManager;
 import KitchenHelper.control.RecipeManager;
-import KitchenHelper.model.*;
+import KitchenHelper.model.FoodInfo;
+import KitchenHelper.model.RecipeInfo;
+import KitchenHelper.model.RecipeStep;
+import KitchenHelper.model.RecipeUse;
 import KitchenHelper.util.BaseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
 
-public class FrmRecipeManager_AddRecipeStep extends JDialog implements ActionListener {
+public class FrmRecipeManager_AddRecipeFood extends JDialog implements ActionListener {
 	private RecipeInfo recipe;
 	private RecipeStep recipeStep = null;
 	private RecipeUse recipeUse = null;
@@ -21,26 +22,43 @@ public class FrmRecipeManager_AddRecipeStep extends JDialog implements ActionLis
 	private JPanel workPane = new JPanel();
 	private Button btnOk = new Button("确定");
 	private Button btnCancel = new Button("取消");
-	private JLabel labelStepNo = new JLabel("步骤编号：");
-	private JLabel labelDetail = new JLabel("步骤详情：");
-
+	private JLabel labelFoodName = new JLabel("食材：");
+	private JLabel labelAmount = new JLabel("食材数量：");
+	private JLabel labelUnit = new JLabel("食材单位：");
 
 	private JTextField edtStepNo = new JTextField(20);
 	private JTextField edtAmount = new JTextField(20);
 	private JTextField edtUnit = new JTextField(20);
 	private JTextField edtDetail = new JTextField(20);
+	private Map<String, FoodInfo> foodMap_name;
+	private JComboBox cmbFoodName;
 
-	public FrmRecipeManager_AddRecipeStep(JDialog f, String s, boolean b, RecipeInfo recipe) {
+	public FrmRecipeManager_AddRecipeFood(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, RecipeInfo recipe) {
 		super(f, s, b);
+		this.foodMap_name = foodMap_name;
 		this.recipe = recipe;
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(btnOk);
 		toolBar.add(btnCancel);
 		this.getContentPane().add(toolBar, BorderLayout.SOUTH);
-		workPane.add(labelStepNo);
-		workPane.add(edtStepNo);
-		workPane.add(labelDetail);
-		workPane.add(edtDetail);
+		workPane.add(labelFoodName);
+
+		//提取食材名称
+		String[] strTypes = new String[this.foodMap_name.size() + 1];
+		strTypes[0] = "";
+		java.util.Iterator<FoodInfo> itRt = this.foodMap_name.values().iterator();
+		int i = 1;
+		while (itRt.hasNext()) {
+			strTypes[i] = itRt.next().getFoodName();
+			i++;
+		}
+		cmbFoodName = new JComboBox(strTypes);
+
+		workPane.add(cmbFoodName);
+		workPane.add(labelAmount);
+		workPane.add(edtAmount);
+		workPane.add(labelUnit);
+		workPane.add(edtUnit);
 
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
 		this.setSize(300, 180);
@@ -62,13 +80,20 @@ public class FrmRecipeManager_AddRecipeStep extends JDialog implements ActionLis
 			this.setVisible(false);
 			return;
 		} else if (e.getSource() == this.btnOk) {
-			RecipeStep recipeStep = new RecipeStep();
-			recipeStep.setRecipeNo(recipe.getRecipeNo());
-			recipeStep.setStepNo(Integer.parseInt(this.edtStepNo.getText()));
-			recipeStep.setStepDetail(this.edtDetail.getText());
+			RecipeUse recipeUse = new RecipeUse();
+			String fName = this.cmbFoodName.getSelectedItem().toString();
+			FoodInfo f = this.foodMap_name.get(fName);
+			if (f == null) {
+				JOptionPane.showMessageDialog(null, "请选择食材", "错误", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			recipeUse.setFoodNo(f.getFoodNo());
+			recipeUse.setRecipeNo(recipe.getRecipeNo());
+			recipeUse.setAmount(Double.parseDouble(this.edtAmount.getText()));
+			recipeUse.setUnit(this.edtUnit.getText());
 			try {
-				(new RecipeManager()).addRecipeStep(recipeStep);
-				this.recipeStep = recipeStep;
+				(new RecipeManager()).addRecipeUse(recipeUse);
+				this.recipeUse = recipeUse;
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				this.recipe = null;
@@ -78,11 +103,6 @@ public class FrmRecipeManager_AddRecipeStep extends JDialog implements ActionLis
 		}
 
 	}
-
-	public RecipeStep getRecipeStep() {
-		return recipeStep;
-	}
-
 	public RecipeUse getRecipeUse() {
 		return recipeUse;
 	}

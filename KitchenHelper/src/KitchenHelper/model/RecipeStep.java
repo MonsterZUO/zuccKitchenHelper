@@ -13,6 +13,7 @@ public class RecipeStep {
 	private int stepNo;
 	private String stepDetail;
 
+
 	public String getRecipeNo() {
 		return recipeNo;
 	}
@@ -36,4 +37,5 @@ public class RecipeStep {
 	public void setStepDetail(String stepDetail) {
 		this.stepDetail = stepDetail;
 	}
+
 }

@@ -181,7 +181,6 @@ public class ReaderManager {
 			if(keyword!=null && !"".equals(keyword)){
 				pst.setString(1, "%"+keyword+"%");
 				pst.setString(2, "%"+keyword+"%");
-				
 			}
 				
 			java.sql.ResultSet rs=pst.executeQuery();
