@@ -39,6 +39,7 @@ public class FrmRecipeManager_ModifyRecipe extends JDialog implements ActionList
 		this.getContentPane().add(toolBar, BorderLayout.SOUTH);
 		workPane.add(labelId);
 		this.edtId.setText(this.recipe.getRecipeNo());
+		this.edtId.setEnabled(false);
 		workPane.add(edtId);
 		workPane.add(labelName);
 		this.edtName.setText(r.getRecipeName());

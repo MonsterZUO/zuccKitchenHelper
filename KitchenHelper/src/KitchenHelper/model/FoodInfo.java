@@ -8,6 +8,7 @@ public class FoodInfo {
 	private double foodAmount;
 	private String foodDetail;
 	private String foodUnit;
+	private double discount;
 
 	private String foodTypeName;
 
@@ -73,5 +74,13 @@ public class FoodInfo {
 
 	public void setFoodTypeName(String foodTypeName) {
 		this.foodTypeName = foodTypeName;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 }

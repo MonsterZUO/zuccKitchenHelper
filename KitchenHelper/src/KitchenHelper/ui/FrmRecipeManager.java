@@ -1,6 +1,7 @@
 package KitchenHelper.ui;
 
 import KitchenHelper.control.FoodManager;
+import KitchenHelper.control.OrderManager;
 import KitchenHelper.control.RecipeManager;
 import KitchenHelper.model.*;
 import KitchenHelper.util.BaseException;
@@ -24,12 +25,16 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 	private Button btnAddFood = new Button("添加食材");
 	private Button btnModifyFood = new Button("修改食材");
 	private Button btnDeleteFood = new Button("删除食材");
+
 	private Map<String, FoodInfo> foodMap_name = new HashMap<String, FoodInfo>();
 	private Map<String, FoodInfo> foodMap_id = new HashMap<String, FoodInfo>();
 	private JComboBox cmbFoodName = null;
 
 	private JTextField edtKeyword = new JTextField(10);
 	private Button btnSearch = new Button("查询");
+	private Button btnAddQuickOrder = new Button("一键下单");
+	private Button btnCollect = new Button("收藏");
+
 
 	private Object tblRecipeTitle[] = {"菜谱编号", "菜谱名称", "贡献用户", "菜谱详情", "综合得分", "收藏数", "浏览数"};
 	private Object tblRecipeData[][];
@@ -164,6 +169,8 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		toolBar.add(this.btnDeleteStep);
 		toolBar.add(edtKeyword);
 		toolBar.add(btnSearch);
+		toolBar.add(btnAddQuickOrder);
+
 
 		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		// 屏幕居中显示
@@ -176,13 +183,18 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		this.btnAdd.addActionListener(this);
 		this.btnModify.addActionListener(this);
 		this.btnDelete.addActionListener(this);
+
 		this.btnAddFood.addActionListener(this);
 		this.btnModifyFood.addActionListener(this);
 		this.btnDeleteFood.addActionListener(this);
-		this.btnSearch.addActionListener(this);
+
 		this.btnAddStep.addActionListener(this);
 		this.btnModifyStep.addActionListener(this);
 		this.btnDeleteStep.addActionListener(this);
+
+		this.btnSearch.addActionListener(this);
+		this.btnAddQuickOrder.addActionListener(this);
+
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -317,11 +329,19 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 				}
-
 			}
-		}
-		else if (e.getSource() == this.btnSearch) {
+		} else if (e.getSource() == this.btnSearch) {
 			this.reloadRecipeTable();
+		} else if (e.getSource() == this.btnAddQuickOrder) {
+			int i = this.dataTableRecipe.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeInfo recipe = this.allRecipe.get(i);
+
+			FrmRecipeManager_AddQuickOrder dlg = new FrmRecipeManager_AddQuickOrder(this, "一键下单", true, recipe);
+			dlg.setVisible(true);
 		}
 
 	}

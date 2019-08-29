@@ -3,18 +3,31 @@ package KitchenHelper.model;
 import java.util.Date;
 
 public class FoodOrder {
-	private String orderNo;
+	/*{"订单编号", "收货人姓名", "收货地址", "收货人手机号码", "订单状态"}*/
+	public String getCell(int col) {
+		if (col == 0) return String.valueOf(orderNo);
+		else if (col == 1) return receiverName;
+		else if (col == 2) return address;
+		else if (col == 3) return phone;
+		else if (col == 4) return orderStatus;
+		else return "";
+	}
+
+	private int orderNo;
 	private String userNo;
+	private String receiverName;
 	private Date deliverTime;
+	private Date createTime;
 	private String address;
 	private String phone;
 	private String orderStatus;
 
-	public String getOrderNo() {
+
+	public int getOrderNo() {
 		return orderNo;
 	}
 
-	public void setOrderNo(String orderNo) {
+	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
 
@@ -57,5 +70,22 @@ public class FoodOrder {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 
 }
