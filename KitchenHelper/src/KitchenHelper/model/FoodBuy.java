@@ -1,16 +1,18 @@
 package KitchenHelper.model;
 
 public class FoodBuy {
-	private String buyNo;
+	private int buyNo;
 	private String foodNo;
 	private double amount;
 	private String buyStatus;
 
-	public String getBuyNo() {
+	private String foodName;
+
+	public int getBuyNo() {
 		return buyNo;
 	}
 
-	public void setBuyNo(String buyNo) {
+	public void setBuyNo(int buyNo) {
 		this.buyNo = buyNo;
 	}
 
@@ -36,5 +38,13 @@ public class FoodBuy {
 
 	public void setBuyStatus(String buyStatus) {
 		this.buyStatus = buyStatus;
+	}
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
 	}
 }

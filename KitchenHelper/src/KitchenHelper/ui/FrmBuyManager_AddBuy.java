@@ -1,36 +1,34 @@
 package KitchenHelper.ui;
 
-import KitchenHelper.control.OrderManager;
+import KitchenHelper.control.BuyManager;
 import KitchenHelper.control.RecipeManager;
 import KitchenHelper.model.*;
 import KitchenHelper.util.BaseException;
 
 import javax.swing.*;
-import javax.xml.stream.events.Comment;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionListener {
-	private FoodOrder order = null;
-	private OrderDetail orderDetail = null;
+
+public class FrmBuyManager_AddBuy extends JDialog implements ActionListener {
+	private FoodBuy foodBuy;
 
 	private JPanel toolBar = new JPanel();
 	private JPanel workPane = new JPanel();
 	private Button btnOk = new Button("确定");
 	private Button btnCancel = new Button("取消");
 	private JLabel labelFoodName = new JLabel("食材：");
-	private JLabel labelAmount = new JLabel("数量：");
+	private JLabel labelAmount = new JLabel("食材数量：");
 
+	private JTextField edtAmount = new JTextField(20);
 	private Map<String, FoodInfo> foodMap_name;
 	private JComboBox cmbFoodName;
-	private JTextField edtAmount = new JTextField(20);
 
-	public FrmRecipeManager_AddOrderFood(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, FoodOrder order) {
+	public FrmBuyManager_AddBuy(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name) {
 		super(f, s, b);
 		this.foodMap_name = foodMap_name;
-		this.order = order;
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(btnOk);
 		toolBar.add(btnCancel);
@@ -72,30 +70,29 @@ public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionList
 			this.setVisible(false);
 			return;
 		} else if (e.getSource() == this.btnOk) {
-			OrderDetail orderDetail = new OrderDetail();
+			FoodBuy foodBuy = new FoodBuy();
 			String fName = this.cmbFoodName.getSelectedItem().toString();
 			FoodInfo f = this.foodMap_name.get(fName);
 			if (f == null) {
 				JOptionPane.showMessageDialog(null, "请选择食材", "错误", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			orderDetail.setFoodNo(f.getFoodNo());
-			orderDetail.setOrderNo(this.order.getOrderNo());
-			orderDetail.setAmount(Double.parseDouble(this.edtAmount.getText()));
+			foodBuy.setFoodNo(f.getFoodNo());
+			foodBuy.setAmount(Double.parseDouble(this.edtAmount.getText()));
 			try {
-				(new OrderManager()).addOrderFood(orderDetail);
-				this.orderDetail = orderDetail;
+				(new BuyManager()).addFoodBuy(foodBuy);
+				this.foodBuy = foodBuy;
 				this.setVisible(false);
 			} catch (BaseException e1) {
-				this.order = null;
+				this.foodBuy = null;
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 		}
 
 	}
-	public OrderDetail getOrderDetail() {
-		return orderDetail;
+	public FoodBuy getFoodBuy() {
+		return foodBuy;
 	}
 
 }

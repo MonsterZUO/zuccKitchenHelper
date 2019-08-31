@@ -179,8 +179,8 @@ public class FrmOrderManager_OrderDetail extends JDialog implements ActionListen
 				JOptionPane.showMessageDialog(null, "请选择订单", "提示", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			OrderDetail orderDetail = this.orderDetail.get(i);
-			FrmRecipeManager_ModifyOrderFood dlg = new FrmRecipeManager_ModifyOrderFood(this, "修改食材", true, this.foodMap_name,
+			OrderDetail orderDetail = this.orderDetails.get(i);
+			FrmOrderManager_ModifyOrderFood dlg = new FrmOrderManager_ModifyOrderFood(this, "修改食材", true, this.foodMap_name,
 					orderDetail);
 			dlg.setVisible(true);
 			if (dlg.getOrderDetail() != null) {// 刷新表格
@@ -192,12 +192,47 @@ public class FrmOrderManager_OrderDetail extends JDialog implements ActionListen
 				JOptionPane.showMessageDialog(null, "请选择订单", "提示", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			OrderDetail orderDetail = this.orderDetail.get(i);
+			OrderDetail orderDetail = this.orderDetails.get(i);
 			if (JOptionPane.showConfirmDialog(this, "确定删除该食材吗？", "确认",
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				try {
 					(new OrderManager()).removeOrderFood(orderDetail);
 					this.reloadOrderDetailTable(i);
+				} catch (BaseException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+		}else if (e.getSource() == this.btnAdd) {
+			FrmRecipeManager_AddOrder dlg = new FrmRecipeManager_AddOrder(this, "添加订单", true);
+			dlg.setVisible(true);
+			if (dlg.getOrder() != null) {// 刷新表格
+				this.reloadOrderTable();
+			}
+		} else if (e.getSource() == this.btnModify) {
+			int i = this.dataTableOrder.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择订单", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			FoodOrder order = this.allOrders.get(i);
+			FrmOrderManager_ModifyOrder dlg = new FrmOrderManager_ModifyOrder(this, "修改订单", true, order);
+			dlg.setVisible(true);
+			if (dlg.getOrder() != null) {// 刷新表格
+				this.reloadOrderTable();
+			}
+		} else if (e.getSource() == this.btnDelete) {
+			int i = this.dataTableOrder.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择订单", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			FoodOrder order = this.allOrders.get(i);
+			if (JOptionPane.showConfirmDialog(this, "确定删除该订单吗？", "确认",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				try {
+					(new OrderManager()).removeOrder(order);
+					this.reloadOrderTable();
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 				}

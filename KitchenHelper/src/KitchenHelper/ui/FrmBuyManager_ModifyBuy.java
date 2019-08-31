@@ -1,10 +1,11 @@
 package KitchenHelper.ui;
 
+import KitchenHelper.control.BuyManager;
 import KitchenHelper.control.OrderManager;
+import KitchenHelper.model.FoodBuy;
 import KitchenHelper.model.FoodInfo;
 import KitchenHelper.model.OrderDetail;
 import KitchenHelper.model.RecipeInfo;
-import KitchenHelper.model.RecipeUse;
 import KitchenHelper.util.BaseException;
 
 import javax.swing.*;
@@ -13,9 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionListener {
-	private RecipeInfo recipe;
-	private RecipeUse recipeUse = null;
+
+public class FrmBuyManager_ModifyBuy extends JDialog implements ActionListener {
+	private FoodBuy foodBuy = null;
 
 	private JPanel toolBar = new JPanel();
 	private JPanel workPane = new JPanel();
@@ -28,10 +29,10 @@ public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionLi
 	private Map<String, FoodInfo> foodMap_name;
 	private JComboBox cmbFoodName;
 
-	public FrmOrderManager_ModifyOrderFood(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, RecipeUse r) {
+	public FrmBuyManager_ModifyBuy(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, FoodBuy r) {
 		super(f, s, b);
 		this.foodMap_name = foodMap_name;
-		this.recipeUse = r;
+		this.foodBuy = r;
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(btnOk);
 		toolBar.add(btnCancel);
@@ -47,7 +48,7 @@ public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionLi
 		while (itRt.hasNext()) {
 			FoodInfo fn = itRt.next();
 			strTypes[i] = fn.getFoodName();
-			if(this.recipeUse.getFoodNo().equals(fn.getFoodNo())){
+			if(this.foodBuy.getFoodNo().equals(fn.getFoodNo())){
 				oldIndex = i;
 			}
 			i++;
@@ -78,22 +79,22 @@ public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionLi
 			this.setVisible(false);
 			return;
 		} else if (e.getSource() == this.btnOk) {
-			RecipeUse recipeUse = new RecipeUse();
+			FoodBuy foodBuy = new FoodBuy();
 			String fName = this.cmbFoodName.getSelectedItem().toString();
 			FoodInfo f = this.foodMap_name.get(fName);
 			if (f == null) {
 				JOptionPane.showMessageDialog(null, "ÇëÑ¡ÔñÊ³²Ä", "´íÎó", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			recipeUse.setFoodNo(this.recipeUse.getFoodNo());
-			recipeUse.setRecipeNo(this.recipeUse.getRecipeNo());
-			recipeUse.setAmount(Double.parseDouble(this.edtAmount.getText()));
+			foodBuy.setFoodNo(f.getFoodNo());
+			foodBuy.setAmount(Double.parseDouble(this.edtAmount.getText()));
+			foodBuy.setBuyNo(this.foodBuy.getBuyNo());
 			try {
-				(new OrderManager()).modifyOrderFood(recipeUse, f.getFoodNo());
-				this.recipeUse = recipeUse;
+				(new BuyManager()).modifyBuy(foodBuy);
+				this.foodBuy = foodBuy;
 				this.setVisible(false);
 			} catch (BaseException e1) {
-				this.recipe = null;
+				this.foodBuy = null;
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "´íÎó", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
@@ -101,10 +102,11 @@ public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionLi
 
 	}
 
-	public RecipeUse getRecipeUse() {
-		return recipeUse;
+	public FoodBuy getFoodBuy() {
+		return foodBuy;
 	}
 
 }
+
 
 

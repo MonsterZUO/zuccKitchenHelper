@@ -1,19 +1,20 @@
 package KitchenHelper.ui;
 
 import KitchenHelper.control.OrderManager;
-import KitchenHelper.control.RecipeManager;
-import KitchenHelper.model.*;
+import KitchenHelper.model.FoodInfo;
+import KitchenHelper.model.OrderDetail;
+import KitchenHelper.model.RecipeInfo;
+import KitchenHelper.model.OrderDetail;
 import KitchenHelper.util.BaseException;
 
 import javax.swing.*;
-import javax.xml.stream.events.Comment;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionListener {
-	private FoodOrder order = null;
+public class FrmOrderManager_ModifyOrderFood extends JDialog implements ActionListener {
+	private RecipeInfo order;
 	private OrderDetail orderDetail = null;
 
 	private JPanel toolBar = new JPanel();
@@ -21,16 +22,16 @@ public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionList
 	private Button btnOk = new Button("确定");
 	private Button btnCancel = new Button("取消");
 	private JLabel labelFoodName = new JLabel("食材：");
-	private JLabel labelAmount = new JLabel("数量：");
+	private JLabel labelAmount = new JLabel("食材数量：");
 
+	private JTextField edtAmount = new JTextField(20);
 	private Map<String, FoodInfo> foodMap_name;
 	private JComboBox cmbFoodName;
-	private JTextField edtAmount = new JTextField(20);
 
-	public FrmRecipeManager_AddOrderFood(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, FoodOrder order) {
+	public FrmOrderManager_ModifyOrderFood(JDialog f, String s, boolean b, Map<String, FoodInfo> foodMap_name, OrderDetail r) {
 		super(f, s, b);
 		this.foodMap_name = foodMap_name;
-		this.order = order;
+		this.orderDetail = r;
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(btnOk);
 		toolBar.add(btnCancel);
@@ -42,12 +43,17 @@ public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionList
 		strTypes[0] = "";
 		java.util.Iterator<FoodInfo> itRt = this.foodMap_name.values().iterator();
 		int i = 1;
+		int oldIndex = 0;
 		while (itRt.hasNext()) {
-			strTypes[i] = itRt.next().getFoodName();
+			FoodInfo fn = itRt.next();
+			strTypes[i] = fn.getFoodName();
+			if(this.orderDetail.getFoodNo().equals(fn.getFoodNo())){
+				oldIndex = i;
+			}
 			i++;
 		}
 		cmbFoodName = new JComboBox(strTypes);
-
+		this.cmbFoodName.setSelectedIndex(oldIndex);
 		workPane.add(cmbFoodName);
 		workPane.add(labelAmount);
 		workPane.add(edtAmount);
@@ -79,11 +85,11 @@ public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionList
 				JOptionPane.showMessageDialog(null, "请选择食材", "错误", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			orderDetail.setFoodNo(f.getFoodNo());
-			orderDetail.setOrderNo(this.order.getOrderNo());
+			orderDetail.setFoodNo(this.orderDetail.getFoodNo());
+			orderDetail.setOrderNo(this.orderDetail.getOrderNo());
 			orderDetail.setAmount(Double.parseDouble(this.edtAmount.getText()));
 			try {
-				(new OrderManager()).addOrderFood(orderDetail);
+				(new OrderManager()).modifyOrderFood(orderDetail, f.getFoodNo());
 				this.orderDetail = orderDetail;
 				this.setVisible(false);
 			} catch (BaseException e1) {
@@ -94,9 +100,11 @@ public class FrmRecipeManager_AddOrderFood extends JDialog implements ActionList
 		}
 
 	}
+
 	public OrderDetail getOrderDetail() {
 		return orderDetail;
 	}
 
 }
+
 
