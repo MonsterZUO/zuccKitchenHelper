@@ -25,6 +25,9 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 	private Button btnAddFood = new Button("添加食材");
 	private Button btnModifyFood = new Button("修改食材");
 	private Button btnDeleteFood = new Button("删除食材");
+	private Button btnAddComment = new Button("添加评价");
+	private Button btnModifyComment = new Button("修改评价");
+	private Button btnDeleteComment = new Button("删除评价");
 
 	private Map<String, FoodInfo> foodMap_name = new HashMap<String, FoodInfo>();
 	private Map<String, FoodInfo> foodMap_id = new HashMap<String, FoodInfo>();
@@ -51,10 +54,16 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 	DefaultTableModel tabStepModel = new DefaultTableModel();
 	private JTable dataTableStep = new JTable(tabStepModel);
 
+	private Object tblCommentTitle[] = {"菜谱编号", "用户编号", "评价内容"};
+	private Object tblCommentData[][];
+	DefaultTableModel tabCommentModel = new DefaultTableModel();
+	private JTable dataTableComment = new JTable(tabCommentModel);
+
 	private RecipeInfo curPlan = null;
 	List<RecipeInfo> allRecipe = null;
 	List<RecipeStep> recipeSteps = null;
 	List<RecipeUse> recipeUse = null;
+	List<RecipeComment> recipeComments = null;
 
 	private void reloadRecipeTable() {//这是测试数据，需要用实际数替换
 		try {
@@ -119,6 +128,29 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		this.dataTableStep.repaint();
 	}
 
+	private void reloadCommentTable(int planIdx) {
+		if (planIdx < 0) {
+			return;
+		}
+		curPlan = allRecipe.get(planIdx);
+		try {
+			recipeComments = (new RecipeManager()).loadComments(curPlan);
+		} catch (BaseException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		tblCommentData = new Object[recipeComments.size()][tblCommentTitle.length];
+		for (int i = 0; i < recipeComments.size(); i++) {
+			for (int j = 0; j < tblCommentTitle.length; j++) {
+				tblCommentData[i][j] = recipeComments.get(i).getCell(j);
+			}
+		}
+
+		tabCommentModel.setDataVector(tblCommentData, tblCommentTitle);
+		this.dataTableComment.validate();
+		this.dataTableComment.repaint();
+	}
+
 	public FrmRecipeManager(Frame f, String s, boolean b) {
 		super(f, s, b);
 		//提取食材名称信息
@@ -149,11 +181,13 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 				}
 				FrmRecipeManager.this.reloadRecipeUseTable(i);
 				FrmRecipeManager.this.reloadRecipeStepTable(i);
+				FrmRecipeManager.this.reloadCommentTable(i);
 			}
 
 		});
 		this.getContentPane().add(new JScrollPane(this.dataTableRecipeUse), BorderLayout.CENTER);
 		this.getContentPane().add(new JScrollPane(this.dataTableStep), BorderLayout.EAST);
+		this.getContentPane().add(new JScrollPane(this.dataTableComment), BorderLayout.SOUTH);
 
 		this.reloadRecipeTable();
 
@@ -167,6 +201,9 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		toolBar.add(btnAddStep);
 		toolBar.add(btnModifyStep);
 		toolBar.add(this.btnDeleteStep);
+		toolBar.add(btnAddComment);
+		toolBar.add(btnModifyComment);
+		toolBar.add(this.btnDeleteComment);
 		toolBar.add(edtKeyword);
 		toolBar.add(btnSearch);
 		toolBar.add(btnAddQuickOrder);
@@ -191,6 +228,10 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 		this.btnAddStep.addActionListener(this);
 		this.btnModifyStep.addActionListener(this);
 		this.btnDeleteStep.addActionListener(this);
+
+		this.btnAddComment.addActionListener(this);
+		this.btnModifyComment.addActionListener(this);
+		this.btnDeleteComment.addActionListener(this);
 
 		this.btnSearch.addActionListener(this);
 		this.btnAddQuickOrder.addActionListener(this);
@@ -238,6 +279,7 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				try {
 					(new RecipeManager()).removeRecipe(recipe.getRecipeNo());
+					JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 					this.reloadRecipeTable();
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
@@ -281,6 +323,7 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				try {
 					(new RecipeManager()).removeRecipeFood(recipeUse);
+					JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 					this.reloadRecipeUseTable(i);
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
@@ -325,7 +368,52 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				try {
 					(new RecipeManager()).removeRecipeStep(recipeStep);
+					JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 					this.reloadRecipeStepTable(i);
+				} catch (BaseException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}else if (e.getSource() == this.btnAddComment) {
+			int i = this.dataTableRecipe.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择菜谱", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeInfo recipe = this.allRecipe.get(i);
+
+			FrmRecipeManager_AddComment dlg = new FrmRecipeManager_AddComment(this, "添加评论", true,
+					recipe);
+			dlg.setVisible(true);
+			if (dlg.getComment() != null) {// 刷新表格
+				this.reloadCommentTable(i);
+			}
+		} else if (e.getSource() == this.btnModifyComment) {
+			int i = this.dataTableComment.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择评论", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			RecipeComment recipeComment = this.recipeComments.get(i);
+			FrmRecipeManager_ModifyComment dlg = new FrmRecipeManager_ModifyComment(this, "修改评论", true, recipeComment);
+			dlg.setVisible(true);
+			if (dlg.getComment() != null) {// 刷新表格
+				this.reloadCommentTable(i);
+			}
+		} else if (e.getSource() == this.btnDeleteComment) {
+			int i = this.dataTableComment.getSelectedRow();
+			if (i < 0) {
+				JOptionPane.showMessageDialog(null, "请选择评论", "提示", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			RecipeComment recipeComment = this.recipeComments.get(i);
+			if (JOptionPane.showConfirmDialog(this, "确定删除该评论吗？", "确认",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				try {
+					(new RecipeManager()).removeComment(recipeComment);
+					JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
+					this.reloadCommentTable(i);
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 				}

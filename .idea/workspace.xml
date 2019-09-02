@@ -2,12 +2,76 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5463e2-5b5b-494c-9ac4-c779e49819f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/antlr_2_7_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KitchenHelper/KitchenHelper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/.idea/KitchenHelper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zuccKitchenHelper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zuccKitchenHelper.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/KitchenHelperStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/KitchenHelperStarter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/BuyManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/BuyManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/OrderManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/OrderManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/RecipeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/RecipeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/UserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/control/UserManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeComment.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeComment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeStep.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeStep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeUse.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/RecipeUse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/UserInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/model/UserInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmBuyManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmBuyManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodTypeManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodTypeManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodTypeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmFoodTypeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmLogin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmRecipeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager_AddUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/ui/FrmUserManager_AddUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/util/DBUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/bin/KitchenHelper/util/DBUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/KitchenHelperStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/KitchenHelperStarter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/BuyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/BuyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/OrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/RecipeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/RecipeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/control/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/RecipeComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/RecipeComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/RecipeUse.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/model/RecipeUse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmBuyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmBuyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmFoodTypeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmFoodTypeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmRecipeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmRecipeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmUserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmUserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmUserManager_AddUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/KitchenHelper/src/KitchenHelper/ui/FrmUserManager_AddUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/er图/KitchenHelper.sws" beforeDir="false" afterPath="$PROJECT_DIR$/er图/KitchenHelper.sws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/er图/kitchenHelper_1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/er图/kitchenHelper_1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/er图/kitchenHelper_1.pdm" beforeDir="false" afterPath="$PROJECT_DIR$/er图/kitchenHelper_1.pdm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/PersonPlanStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/PersonPlanStarter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/PersonPlanUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/PersonPlanUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExamplePlanManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExamplePlanManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleStepManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleStepManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleUserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/control/example/ExampleUserManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IPlanManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IPlanManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IStepManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IStepManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IUserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/itf/IUserManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanPlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanStep.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanStep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/model/BeanUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmAddPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmAddPlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmAddStep.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmAddStep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmModifyPwd.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmModifyPwd.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/ui/FrmRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/BaseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/BaseException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/BusinessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/BusinessException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil2.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DBUtil2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DbException.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/DbException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/HibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/plan/bin/cn/edu/zucc/personplan/util/HibernateUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/大作业需求汇总表（厨房小帮手）.xls" beforeDir="false" afterPath="$PROJECT_DIR$/大作业需求汇总表（厨房小帮手）.xls" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +97,7 @@
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -58,6 +123,9 @@
       <updated>1566716945376</updated>
       <workItem from="1566716946726" duration="71000" />
       <workItem from="1566742952482" duration="859000" />
+      <workItem from="1567388885839" duration="362000" />
+      <workItem from="1567389276049" duration="237000" />
+      <workItem from="1567389541194" duration="40000" />
     </task>
     <servers />
   </component>
@@ -69,7 +137,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

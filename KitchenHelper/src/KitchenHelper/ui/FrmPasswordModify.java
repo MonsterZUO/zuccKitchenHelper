@@ -56,6 +56,7 @@ public class FrmPasswordModify extends JDialog implements ActionListener {
 			try {
 				sum.changePwd(UserManager.currentUser, new String(edtPwdOld.getPassword()),
 						new String(edtPwd.getPassword()), new String(edtPwd2.getPassword()));
+				JOptionPane.showMessageDialog(null, "密码修改完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);

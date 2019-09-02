@@ -116,6 +116,7 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 
 			try {
 				(new FoodManager()).createFood(r);
+				JOptionPane.showMessageDialog(null, "食材已添加", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.food = r;
 				this.setVisible(false);
 			} catch (BaseException e1) {

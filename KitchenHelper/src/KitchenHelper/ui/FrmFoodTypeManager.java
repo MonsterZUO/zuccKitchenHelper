@@ -99,7 +99,7 @@ public class FrmFoodTypeManager extends JDialog implements ActionListener {
 			foodtype.setFoodTypeNo(n);
 			foodtype.setFoodTypeName(this.tblData[i][1].toString());
 			foodtype.setFoodTypeDetail(this.tblData[i][2].toString());
-			FrmFoodTypeManager_ModifyFoodType dlg = new FrmFoodTypeManager_ModifyFoodType(this, "添加读者类别", true,
+			FrmFoodTypeManager_ModifyFoodType dlg = new FrmFoodTypeManager_ModifyFoodType(this, "添加食材类别", true,
 					foodtype);
 			dlg.setVisible(true);
 			if (dlg.getFoodtype() != null) {// 刷新表格
@@ -116,6 +116,7 @@ public class FrmFoodTypeManager extends JDialog implements ActionListener {
 				int n = Integer.parseInt(this.tblData[i][0].toString());
 				try {
 					(new FoodManager()).deleteFoodType(n);
+					JOptionPane.showMessageDialog(null, "删除完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 					this.reloadTable();
 				} catch (BaseException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);

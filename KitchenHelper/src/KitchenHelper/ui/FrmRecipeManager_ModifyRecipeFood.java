@@ -96,6 +96,7 @@ public class FrmRecipeManager_ModifyRecipeFood extends JDialog implements Action
 			recipeUse.setUnit(this.edtUnit.getText());
 			try {
 				(new RecipeManager()).modifyRecipeUse(recipeUse, f.getFoodNo());
+				JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.recipeUse = recipeUse;
 				this.setVisible(false);
 			} catch (BaseException e1) {

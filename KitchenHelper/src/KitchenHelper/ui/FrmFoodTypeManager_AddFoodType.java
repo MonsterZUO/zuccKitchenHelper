@@ -66,6 +66,7 @@ public class FrmFoodTypeManager_AddFoodType extends JDialog implements ActionLis
 			this.foodtype.setFoodTypeDetail(detail);
 			try {
 				(new FoodManager()).createFoodType(this.foodtype);
+				JOptionPane.showMessageDialog(null, "食材类别添加完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				this.foodtype = null;

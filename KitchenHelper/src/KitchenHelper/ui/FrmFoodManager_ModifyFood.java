@@ -144,6 +144,7 @@ public class FrmFoodManager_ModifyFood extends JDialog implements ActionListener
 			r.setFoodTypeNo(rt.getFoodTypeNo());
 			try {
 				(new FoodManager()).modifyFood(r);
+				JOptionPane.showMessageDialog(null, "食材已修改", "提示", JOptionPane.INFORMATION_MESSAGE);
 //				if (this.food.getFoodTypeNo() != rt.getFoodTypeNo()) {
 //					(new FoodManager()).changeFoodType(this.food.getFoodNo(), rt.getFoodTypeNo());
 //				}

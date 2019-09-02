@@ -4,7 +4,8 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{55BE266E-020E-4A41-BFC0-45DAC32EED1F}" Name="kitchenHelper" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="kitchenHelper_1.pdm"/>
+		<Model Expanded="Yes" ID="{55BE266E-020E-4A41-BFC0-45DAC32EED1F}" Name="kitchenHelper" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="已完成/kitchenHelper.pdm"/>
+		<Model Expanded="Yes" ID="{4CAA3E10-233E-41F1-A864-1042DB67FBD4}" Name="kitchenHelper" Selected="Yes" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="已完成/kitchenHelper.cdm"/>
 	</Local>
 	<BrowserModule Name="仓库(&amp;R)"/>
 </Workspace>

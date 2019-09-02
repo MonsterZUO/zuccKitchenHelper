@@ -68,6 +68,7 @@ public class FrmRecipeManager_AddQuickOrder extends JDialog implements ActionLis
 			try {
 				FoodOrder fo_AfterAdd = (new OrderManager()).addFoodOrder(fo, UserManager.currentUser);
 				(new OrderManager()).addQuickOrder(this.recipe,fo_AfterAdd);
+				JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				this.recipe = null;

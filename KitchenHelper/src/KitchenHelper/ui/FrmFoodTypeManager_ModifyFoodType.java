@@ -76,6 +76,7 @@ public class FrmFoodTypeManager_ModifyFoodType extends JDialog implements Action
 			this.foodtype.setFoodTypeName(name);
 			try {
 				(new FoodManager()).modifyFoodType(this.foodtype);
+				JOptionPane.showMessageDialog(null, "修改完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.setVisible(false);
 			} catch (BaseException e1) {
 				this.foodtype = null;

@@ -68,6 +68,7 @@ public class FrmRecipeManager_AddRecipeStep extends JDialog implements ActionLis
 			recipeStep.setStepDetail(this.edtDetail.getText());
 			try {
 				(new RecipeManager()).addRecipeStep(recipeStep);
+				JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.recipeStep = recipeStep;
 				this.setVisible(false);
 			} catch (BaseException e1) {

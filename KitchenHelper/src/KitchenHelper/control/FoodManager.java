@@ -349,4 +349,25 @@ public class FoodManager {
 		}
 		return result;
 	}
+
+	public void removeFood(FoodInfo food) throws BaseException{
+		Connection conn = null;
+		try{
+			conn = DBUtil.getConnection();
+			String sql = "delete from foodinfo where foodno = ?";
+			java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, food.getFoodNo());
+			pst.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
 }

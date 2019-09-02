@@ -63,6 +63,7 @@ public class FrmRecipeManager_AddRecipe extends JDialog implements ActionListene
 			recipe.setRecipeDetail(this.edtDetail.getText());
 			try {
 				(new RecipeManager()).createRecipe(recipe);
+				JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 				this.recipe = recipe;
 				this.setVisible(false);
 			} catch (BaseException e1) {

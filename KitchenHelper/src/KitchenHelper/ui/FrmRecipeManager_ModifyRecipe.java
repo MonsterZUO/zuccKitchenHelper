@@ -81,6 +81,7 @@ public class FrmRecipeManager_ModifyRecipe extends JDialog implements ActionList
 			r.setRecipeDetail(detail);
 			try {
 				(new RecipeManager()).modifyRecipe(r, this.recipe.getRecipeNo());
+				JOptionPane.showMessageDialog(null, "已完成", "提示", JOptionPane.INFORMATION_MESSAGE);
 //				if (this.food.getFoodTypeNo() != rt.getFoodTypeNo()) {
 //					(new FoodManager()).changeFoodType(this.food.getFoodNo(), rt.getFoodTypeNo());
 //				}
