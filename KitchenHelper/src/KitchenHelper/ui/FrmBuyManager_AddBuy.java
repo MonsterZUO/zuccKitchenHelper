@@ -51,7 +51,7 @@ public class FrmBuyManager_AddBuy extends JDialog implements ActionListener {
 		workPane.add(edtAmount);
 
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(300, 180);
+		this.setSize(313, 180);
 		// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

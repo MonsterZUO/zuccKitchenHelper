@@ -49,7 +49,7 @@ public class FrmRecipeManager_ModifyRecipe extends JDialog implements ActionList
 		workPane.add(edtDetail);
 
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(360, 180);
+		this.setSize(259, 173);
 		// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

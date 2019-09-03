@@ -21,7 +21,7 @@ public class FrmRecipeManager_AddQuickOrder extends JDialog implements ActionLis
 	private Button btnCancel = new Button("取消");
 	private JLabel labelReceiverName = new JLabel("收件人姓名：");
 	private JLabel labelAddress = new JLabel("收件地址：");
-	private JLabel labelPhone = new JLabel("手机号码：");
+	private JLabel labelPhone = new JLabel("手机号码(11位)：");
 
 
 	private JTextField edtReceiverName = new JTextField(20);
@@ -43,7 +43,7 @@ public class FrmRecipeManager_AddQuickOrder extends JDialog implements ActionLis
 		workPane.add(edtPhone);
 
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(300, 180);
+		this.setSize(256, 173);
 		// 屏幕居中显示
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

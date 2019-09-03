@@ -44,7 +44,7 @@ public class FrmOrderManager_ModifyOrder extends JDialog implements ActionListen
 		workPane.add(edtPhone);
 
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(300, 180);
+		this.setSize(260, 173);
 		// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

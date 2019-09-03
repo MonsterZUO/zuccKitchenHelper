@@ -319,7 +319,7 @@ public class FrmRecipeManager extends JDialog implements ActionListener {
 				return;
 			}
 			RecipeUse recipeUse = this.recipeUse.get(i);
-			if (JOptionPane.showConfirmDialog(this, "确定删除该步骤吗？", "确认",
+			if (JOptionPane.showConfirmDialog(this, "确定删除该食材吗？", "确认",
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				try {
 					(new RecipeManager()).removeRecipeFood(recipeUse);

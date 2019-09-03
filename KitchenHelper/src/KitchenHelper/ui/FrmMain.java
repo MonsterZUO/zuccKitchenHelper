@@ -25,7 +25,7 @@ public class FrmMain extends JFrame implements ActionListener {
 	private JMenuItem menuItem_PasswordReset = new JMenuItem("密码修改");
 	private JMenuItem menuItem_PersonalInfoUpdate = new JMenuItem("信息完善");
 
-	private JMenuItem menuItem_SearchRecipe = new JMenuItem("查询菜谱");
+//	private JMenuItem menuItem_SearchRecipe = new JMenuItem("查询菜谱");
 	//	private JMenuItem menuItem_CreateRecipe = new JMenuItem("创建菜谱");
 	private JMenuItem menuItem_RecipeManager = new JMenuItem("菜谱管理");
 
@@ -84,6 +84,37 @@ public class FrmMain extends JFrame implements ActionListener {
 			menu_OrderManager.add(menuItem_OrderDetail);
 			menuItem_OrderDetail.addActionListener(this);
 			menubar.add(menu_OrderManager);
+		} else if ("developer".equals(UserManager.currentUser.getUserType())){
+			JMenu menu_InfoManager = new JMenu("信息维护");
+			menu_InfoManager.add(menuItem_UserManager);
+			menuItem_UserManager.addActionListener(this);
+			menu_InfoManager.add(menuItem_FoodTypeManager);
+			menuItem_FoodTypeManager.addActionListener(this);
+			menu_InfoManager.add(menuItem_FoodManager);
+			menuItem_FoodManager.addActionListener(this);
+			menubar.add(menu_InfoManager);
+			menu_RecipeManager.add(menuItem_RecipeManager);
+			menuItem_RecipeManager.addActionListener(this);
+			menubar.add(menu_RecipeManager);
+//			menu_RecipeManager.add(menuItem_SearchRecipe);
+//			menuItem_SearchRecipe.addActionListener(this);
+//			menu_RecipeManager.add(menuItem_RecipeManager);
+//			menuItem_RecipeManager.addActionListener(this);
+//			menubar.add(menu_RecipeManager);
+//			menu_OrderManager.add(menuItem_OrderCheck);
+//			menuItem_OrderCheck.addActionListener(this);
+			menu_OrderManager.add(menuItem_OrderDetail);
+			menuItem_OrderDetail.addActionListener(this);
+			menubar.add(menu_OrderManager);
+//			menu_BuyManager.add(menuItem_BuyCheck);
+//			menuItem_BuyCheck.addActionListener(this);
+			menu_BuyManager.add(menuItem_BuyDetail);
+			menuItem_BuyDetail.addActionListener(this);
+//			menu_BuyManager.add(menuItem_BuyTotal);
+//			menuItem_BuyTotal.addActionListener(this);
+//			menu_BuyManager.add(menuItem_BuyUpdate);
+//			menuItem_BuyUpdate.addActionListener(this);
+			menubar.add(menu_BuyManager);
 		}
 
 		this.setJMenuBar(menubar);
@@ -119,7 +150,7 @@ public class FrmMain extends JFrame implements ActionListener {
 			FrmRecipeManager dlg = new FrmRecipeManager(this, "菜谱管理", true);
 			dlg.setVisible(true);
 		} else if (e.getSource() == this.menuItem_OrderDetail) {
-			FrmOrderManager_OrderDetail dlg = new FrmOrderManager_OrderDetail(this, "订单详情", true);
+			FrmOrderManager_OrderDetail dlg = new FrmOrderManager_OrderDetail(this, "订单管理", true);
 			dlg.setVisible(true);
 		} else if (e.getSource() == this.menuItem_BuyDetail) {
 			FrmBuyManager dlg = new FrmBuyManager(this, "采购管理", true);

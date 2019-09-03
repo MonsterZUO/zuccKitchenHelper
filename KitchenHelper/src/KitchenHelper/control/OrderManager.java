@@ -19,6 +19,8 @@ public class OrderManager {
 		List<RecipeUse> rList = new ArrayList<RecipeUse>();
 		List<FoodInfo> fList = new ArrayList<FoodInfo>();
 		Map<String, FoodInfo> m = new HashMap<String, FoodInfo>();
+		if (fo.getPhone() == null || "".equals(fo.getPhone()) || fo.getPhone().length() > 11)
+			throw new BaseException("手机号码不能为空且长度不超过11位");
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();

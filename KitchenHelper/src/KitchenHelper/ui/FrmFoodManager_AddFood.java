@@ -77,7 +77,7 @@ public class FrmFoodManager_AddFood extends JDialog implements ActionListener {
 		workPane.add(labelFoodDetail);
 		workPane.add(edtDetail);
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(360, 180);
+		this.setSize(171, 400);
 		// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();

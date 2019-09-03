@@ -46,7 +46,7 @@ public class FrmFoodTypeManager_ModifyFoodType extends JDialog implements Action
 		this.edtDetail.setText(rt.getFoodTypeDetail() + "");
 		workPane.add(edtDetail);
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(360, 140);
+		this.setSize(260, 132);
 		// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
